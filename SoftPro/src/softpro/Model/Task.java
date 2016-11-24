@@ -1,13 +1,14 @@
 
 package softpro.Model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Task implements Iterable<Task>{
-    private int id;
+    private final int id;
+    private final int parent;
     private State state;
-    private int parent;
     private User responsible;
     private String description;
     private String details;
@@ -24,6 +25,7 @@ public class Task implements Iterable<Task>{
         this.details = details;
         this.estimated_duration = estimated_duration;
         this.real_duration = real_duration;
+        this.predecesors = new ArrayList<>();
     }
 
     public void setState(State state) {

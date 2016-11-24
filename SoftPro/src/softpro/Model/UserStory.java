@@ -6,24 +6,16 @@ import java.util.List;
 
 public class UserStory implements Iterable<Task>{
 
-    private String name;
+    private String description;
     private String details;
     private State state;
-    private int id;
+    private final int id;
     private int points;
     private int priority;
     private List<Task> taskList;
 
-    public UserStory(String name, String details, int points, int id, int prioridad) {
-        this(name, details, points, id, prioridad, State.ToDo);
-    }
-
-    public UserStory(String name, String details) {
-        this(name, details, 0, 0, 0, State.ToDo);
-    }
-
-    public UserStory(String name, String details, int points, int id, int prioridad, State state) {
-        this.name = name;
+    public UserStory(String description, String details, int points, int id, int prioridad, State state) {
+        this.description = description;
         this.details = details;
         this.state = state;
         this.id = id;
@@ -32,8 +24,8 @@ public class UserStory implements Iterable<Task>{
         this.taskList = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
     public String getDetails() {
@@ -57,7 +49,7 @@ public class UserStory implements Iterable<Task>{
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.description = name;
     }
 
     public void setDetails(String details) {

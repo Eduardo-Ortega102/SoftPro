@@ -2,20 +2,20 @@ package softpro.Persistence;
 
 import java.util.List;
 
-public interface ObjectManager<E> {
+public interface ObjectManager<E,R> {
 
     List<E> loadAll();
 
-    List<E> loadRelatedWith(int id);
+    List<E> loadRelatedWith(R record);
 
     E load(int id);
 
     boolean exist(int id);
     
-    boolean insert(E record);
+    boolean insert(E element);
     
-    boolean update(E record);
+    boolean update(E element);
 
-    boolean delete(E record);
+    boolean delete(E element);
     
 }
