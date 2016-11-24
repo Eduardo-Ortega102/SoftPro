@@ -1,9 +1,10 @@
 package softpro.Model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class UserStory {
+public class UserStory implements Iterable<Task>{
 
     private String name;
     private String details;
@@ -31,15 +32,11 @@ public class UserStory {
         this.taskList = new ArrayList<>();
     }
 
-    public String getDescription() {
+    public String getName() {
         return name;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
-    public String getDetalles() {
+    public String getDetails() {
         return details;
     }
 
@@ -47,8 +44,24 @@ public class UserStory {
         return state;
     }
 
-    public int getPrioridad() {
+    public int getId() {
+        return id;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public int getPriority() {
         return priority;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public void setState(State state) {
@@ -64,10 +77,27 @@ public class UserStory {
     }
 
     public void addTask(String description) {
-        this.taskList.add(new Task());
+        this.taskList.add(null);
     }
 
-    public void removeTask(int id) {
+    public void removeTask(Task task) {
+        this.taskList.remove(task);
+    }
 
+    @Override
+    public int hashCode() {
+        return 67 * 3 + this.id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+        return this.id == ((UserStory) obj).id;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return this.taskList.iterator();
     }
 }
