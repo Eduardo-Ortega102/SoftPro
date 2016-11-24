@@ -8,25 +8,27 @@ public class UserStory {
     private String name;
     private String description;
     private State state;
+    private int id;
     private int points;
     private int priority;
     private List<Task> taskList;
 
-    public UserStory(String name, String description, int points, int prioridad, State state) {
+    public UserStory(String name, String description, int points, int id, int prioridad, State state) {
         this.name = name;
         this.description = description;
         this.state = state;
+        this.id = id;
         this.points = points;
         this.priority = prioridad;
         this.taskList = new ArrayList<>();
     }
 
-    public UserStory(String name, String description, int points, int prioridad) {
-        this(name, description, points, prioridad, State.ToDo);
+    public UserStory(String name, String description, int points, int id, int prioridad) {
+        this(name, description, points, id, prioridad, State.ToDo);
     }
 
     public UserStory(String name, String description) {
-        this(name, description, 0, 0, State.ToDo);
+        this(name, description, 0, 0, 0, State.ToDo);
     }
 
     public String getDescription() {
