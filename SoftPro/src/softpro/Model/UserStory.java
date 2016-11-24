@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UserStory implements Iterable<Task>{
-
     private String description;
     private String details;
     private State state;
@@ -68,8 +67,10 @@ public class UserStory implements Iterable<Task>{
         this.priority = priority;
     }
 
-    public void addTask(String description) {
-        this.taskList.add(null);
+    
+    
+    public void addTask(Task task) {
+        this.taskList.add(task);
     }
 
     public void removeTask(Task task) {

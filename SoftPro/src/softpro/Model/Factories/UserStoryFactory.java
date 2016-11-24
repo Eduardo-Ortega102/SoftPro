@@ -1,4 +1,4 @@
-package softpro.Controller;
+package softpro.Model.Factories;
 
 import softpro.Model.State;
 import softpro.Model.UserStory;
