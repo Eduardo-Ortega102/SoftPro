@@ -6,29 +6,29 @@ import java.util.List;
 public class UserStory {
 
     private String name;
-    private String description;
+    private String details;
     private State state;
     private int id;
     private int points;
     private int priority;
     private List<Task> taskList;
 
-    public UserStory(String name, String description, int points, int id, int prioridad, State state) {
+    public UserStory(String name, String details, int points, int id, int prioridad) {
+        this(name, details, points, id, prioridad, State.ToDo);
+    }
+
+    public UserStory(String name, String details) {
+        this(name, details, 0, 0, 0, State.ToDo);
+    }
+
+    public UserStory(String name, String details, int points, int id, int prioridad, State state) {
         this.name = name;
-        this.description = description;
+        this.details = details;
         this.state = state;
         this.id = id;
         this.points = points;
         this.priority = prioridad;
         this.taskList = new ArrayList<>();
-    }
-
-    public UserStory(String name, String description, int points, int id, int prioridad) {
-        this(name, description, points, id, prioridad, State.ToDo);
-    }
-
-    public UserStory(String name, String description) {
-        this(name, description, 0, 0, 0, State.ToDo);
     }
 
     public String getDescription() {
@@ -40,7 +40,7 @@ public class UserStory {
     }
 
     public String getDetalles() {
-        return description;
+        return details;
     }
 
     public State getState() {
@@ -62,12 +62,12 @@ public class UserStory {
     public void setPriority(int priority) {
         this.priority = priority;
     }
-    
-    public void addTask(){
+
+    public void addTask(String description) {
         this.taskList.add(new Task());
     }
-    
-    public void removeTask(){
-        
+
+    public void removeTask(int id) {
+
     }
 }
