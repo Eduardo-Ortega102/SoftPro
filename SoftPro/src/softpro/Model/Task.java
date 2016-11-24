@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Task implements Iterable<Task>{
     private final int id;
-    private final int parent;
     private State state;
     private User responsible;
     private String description;
@@ -19,7 +18,6 @@ public class Task implements Iterable<Task>{
     public Task(int id, State state, int parent, User responsible, String description, String details, int estimated_duration, int real_duration) {
         this.id = id;
         this.state = state;
-        this.parent = parent;
         this.responsible = responsible;
         this.description = description;
         this.details = details;
@@ -58,10 +56,6 @@ public class Task implements Iterable<Task>{
 
     public State getState() {
         return state;
-    }
-
-    public int getParent() {
-        return parent;
     }
 
     public User getResponsible() {
