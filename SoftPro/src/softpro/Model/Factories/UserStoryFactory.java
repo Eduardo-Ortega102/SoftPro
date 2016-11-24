@@ -5,7 +5,7 @@ import softpro.Model.UserStory;
 
 public interface UserStoryFactory {
 
-    UserStory create(String description, String details);
+    UserStory create(int id, String description);
 
     UserStory create(int id, String description, String details);
 
