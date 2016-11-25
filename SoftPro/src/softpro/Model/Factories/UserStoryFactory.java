@@ -4,6 +4,8 @@ import softpro.Model.State;
 import softpro.Model.UserStory;
 
 public interface UserStoryFactory {
+    
+    boolean delete(UserStory userStory);
 
     UserStory create(int id, String description);
 

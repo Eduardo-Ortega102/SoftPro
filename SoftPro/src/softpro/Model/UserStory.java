@@ -3,8 +3,9 @@ package softpro.Model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import softpro.Model.Factories.TaskFactory;
 
-public class UserStory implements Iterable<Task>{
+public class UserStory implements Iterable<Task>, TaskFactory {
     private String description;
     private String details;
     private State state;
@@ -67,16 +68,6 @@ public class UserStory implements Iterable<Task>{
         this.priority = priority;
     }
 
-    
-    
-    public void addTask(Task task) {
-        this.taskList.add(task);
-    }
-
-    public void removeTask(Task task) {
-        this.taskList.remove(task);
-    }
-
     @Override
     public int hashCode() {
         return 67 * 3 + this.id;
@@ -92,5 +83,40 @@ public class UserStory implements Iterable<Task>{
     @Override
     public Iterator<Task> iterator() {
         return this.taskList.iterator();
+    }
+
+    @Override
+    public boolean delete(Task task) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Task create(int id, String description) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Task create(int id, String description, String details) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state, User responsible) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state, User responsible, int estimated_duration) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state, User responsible, int estimated_duration, int real_duration) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

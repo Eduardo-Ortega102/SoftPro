@@ -7,7 +7,7 @@ import softpro.Model.Factories.UserStoryFactory;
 
 public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
-    private final List<UserStory> stories; // git... ¬.¬
+    private final List<UserStory> stories; 
 
     public ProductBacklog() {
         this.stories = new ArrayList<>();
@@ -43,6 +43,11 @@ public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
         UserStory story = new UserStory(description, details, points, id, prioridad, state);
         stories.add(story);
         return story;
+    }
+
+    @Override
+    public boolean delete(UserStory userStory) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

@@ -1,18 +1,34 @@
 package softpro;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import softpro.Model.IncrementalProject;
 import softpro.Model.ScrumProject;
+import softpro.Model.Sprint;
+import softpro.Model.UseCase;
 import softpro.Persistence.Database.SqliteInterface;
 
 public class Application {
 
     public static void main(String[] args) {
-        ScrumProject scrumProject = new ScrumProject("GS1 SCRUM - TEST");
+        ScrumProject scrumProject = new ScrumProject(123, "GS1 SCRUM - TEST");
         scrumProject.saveProject();
-        IncrementalProject incrementalProject = new IncrementalProject("GS1 INCREMENTAL - TEST");
+        
+        for (UseCase useCase : scrumProject.cases()) {
+            
+        }
+        
+        for (Sprint sprint : scrumProject) {
+            
+        }
+        
+    
+        
+        
+        
+        IncrementalProject incrementalProject = new IncrementalProject(134, "GS1 INCREMENTAL - TEST");
         incrementalProject.saveProject();
         new Application().start();
     }
