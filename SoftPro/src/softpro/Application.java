@@ -9,6 +9,7 @@ import softpro.Model.ScrumProject;
 import softpro.Model.Sprint;
 import softpro.Model.UseCase;
 import softpro.Persistence.Database.SqliteInterface;
+import static softpro.Persistence.IdGetter.IdGetter;
 
 public class Application {
 
@@ -16,35 +17,35 @@ public class Application {
         ScrumProject scrumProject = new ScrumProject(123, "GS1 SCRUM - TEST");
         scrumProject.saveProject();
         
-        for (UseCase useCase : scrumProject.cases()) {
+        /*for (UseCase useCase : scrumProject.cases()) {
             
         }
         
         for (Sprint sprint : scrumProject) {
             
-        }
+        }*/
         
     
         
         
         
-        IncrementalProject incrementalProject = new IncrementalProject(134, "GS1 INCREMENTAL - TEST");
-        incrementalProject.saveProject();
+        //IncrementalProject incrementalProject = new IncrementalProject(134, "GS1 INCREMENTAL - TEST");
+        //incrementalProject.saveProject();
         new Application().start();
     }
 
     private void start() {
                     
             SqliteInterface sqliteInterface = new SqliteInterface();
-            /*Map<String, Object> mapaValores = new HashMap<>();
+            Map<String, Object> mapaValores = new HashMap<>();
             
-            mapaValores.put("id", null);
-            mapaValores.put("telefono", 000000165);
-            mapaValores.put("mail", "00001@gmail.com");
+            mapaValores.put("id", IdGetter("staff"));
+            mapaValores.put("telefono", 000000556);
+            mapaValores.put("mail", "000024@gmail.com");
             mapaValores.put("nombre", "Donald Duck");
             sqliteInterface.insertInto("staff", mapaValores);
             
-            */
+            
             String[] myStringArray = {"*"};
             List<String> result = sqliteInterface.selectFrom("staff", myStringArray);
             
