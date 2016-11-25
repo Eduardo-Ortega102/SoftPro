@@ -7,7 +7,7 @@ import softpro.Model.Factories.UserStoryFactory;
 
 public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
-    private final List<UserStory> stories;
+    private final List<UserStory> stories; // git... ¬.¬
 
     public ProductBacklog() {
         this.stories = new ArrayList<>();
