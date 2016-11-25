@@ -3,11 +3,17 @@ package softpro;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import softpro.Model.IncrementalProject;
+import softpro.Model.ScrumProject;
 import softpro.Persistence.Database.SqliteInterface;
 
 public class Application {
 
     public static void main(String[] args) {
+        ScrumProject scrumProject = new ScrumProject("GS1 SCRUM - TEST");
+        scrumProject.saveProject();
+        IncrementalProject incrementalProject = new IncrementalProject("GS1 INCREMENTAL - TEST");
+        incrementalProject.saveProject();
         new Application().start();
     }
 
@@ -30,6 +36,11 @@ public class Application {
                 System.out.println(string);
             });
 
+            result = sqliteInterface.selectFrom("project", myStringArray);
+            result.stream().forEach((string) -> {
+                System.out.println(string);
+            });
+            
             /*sqliteInterface.deleteFrom("staff", "id = 4");
             Map<String, Object> mapaValores = new HashMap<>();
             mapaValores.put("nombre", "HDP");
