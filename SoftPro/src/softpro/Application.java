@@ -14,8 +14,8 @@ import static softpro.Persistence.IdGetter.IdGetter;
 public class Application {
 
     public static void main(String[] args) {
-        ScrumProject scrumProject = new ScrumProject(123, "GS1 SCRUM - TEST");
-        scrumProject.saveProject();
+//        ScrumProject scrumProject = new ScrumProject(123, "GS1 SCRUM - TEST");
+//        scrumProject.saveProject();
         
         /*for (UseCase useCase : scrumProject.cases()) {
             
@@ -40,9 +40,9 @@ public class Application {
             Map<String, Object> mapaValores = new HashMap<>();
             
             mapaValores.put("id", IdGetter("staff"));
-            mapaValores.put("telefono", 000000556);
-            mapaValores.put("mail", "000024@gmail.com");
-            mapaValores.put("nombre", "Donald Duck");
+            mapaValores.put("phone", "000000001");
+            mapaValores.put("email", "minnie@gmail.com");
+            mapaValores.put("name", "Minnie Mouse");
             sqliteInterface.insertInto("staff", mapaValores);
             
             
@@ -53,10 +53,10 @@ public class Application {
                 System.out.println(string);
             });
 
-            result = sqliteInterface.selectFrom("project", myStringArray);
-            result.stream().forEach((string) -> {
-                System.out.println(string);
-            });
+//            result = sqliteInterface.selectFrom("projects", myStringArray);
+//            result.stream().forEach((string) -> {
+//                System.out.println(string);
+//            });
             
             /*sqliteInterface.deleteFrom("staff", "id = 4");
             Map<String, Object> mapaValores = new HashMap<>();

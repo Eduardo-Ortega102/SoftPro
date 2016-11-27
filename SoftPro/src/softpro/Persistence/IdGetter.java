@@ -9,7 +9,7 @@ public class IdGetter {
         SqliteInterface sqliteInterface = new SqliteInterface();
         String[] all = {"*"};
         List<String> result = sqliteInterface.selectFrom(table, all);
-        int maxValue = 1;
+        int maxValue = 0;
         
         for(int i=0;i<result.size();i++){
             if(Integer.valueOf(result.get(i).substring(5, result.get(i).indexOf
