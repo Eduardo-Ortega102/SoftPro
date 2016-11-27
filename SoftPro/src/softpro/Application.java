@@ -49,9 +49,9 @@ public class Application {
             String[] myStringArray = {"*"};
             List<String> result = sqliteInterface.selectFrom("staff", myStringArray);
             
-            result.stream().forEach((string) -> {
-                System.out.println(string);
-            });
+            //result.stream().forEach((string) -> {
+            //    System.out.println(string);
+            //});
 
 //            result = sqliteInterface.selectFrom("projects", myStringArray);
 //            result.stream().forEach((string) -> {
