@@ -13,7 +13,7 @@ public class SqliteInterface implements BDInterface {
     private final Statement statement;
 
     public SqliteInterface() {
-        this.statement = SqliteConnection.connect("src/softpro/Persistence/Database/BDSoftpro.db");
+        this.statement = SqliteConnection.connect("src/softpro/Persistence/Database/Softpro.db");
     }
 
     @Override
