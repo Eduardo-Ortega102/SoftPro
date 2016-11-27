@@ -16,7 +16,7 @@ public class Application {
     public static void main(String[] args) {
 //        ScrumProject scrumProject = new ScrumProject(123, "GS1 SCRUM - TEST");
 //        scrumProject.saveProject();
-        
+
         /*for (UseCase useCase : scrumProject.cases()) {
             
         }
@@ -24,41 +24,41 @@ public class Application {
         for (Sprint sprint : scrumProject) {
             
         }*/
-        
-    
-        
-        
-        
         //IncrementalProject incrementalProject = new IncrementalProject(134, "GS1 INCREMENTAL - TEST");
         //incrementalProject.saveProject();
         new Application().start();
     }
 
     private void start() {
-                    
-            SqliteInterface sqliteInterface = new SqliteInterface();
-            Map<String, Object> mapaValores = new HashMap<>();
-            
-            mapaValores.put("id", IdGetter("staff"));
-            mapaValores.put("phone", "000000001");
-            mapaValores.put("email", "minnie@gmail.com");
-            mapaValores.put("name", "Minnie Mouse");
-            sqliteInterface.insertInto("staff", mapaValores);
-            
-            
-            String[] myStringArray = {"*"};
-            List<String> result = sqliteInterface.selectFrom("staff", myStringArray);
-            
-            result.stream().forEach((string) -> {
-                System.out.println(string);
-            });
+
+        SqliteInterface sqliteInterface = new SqliteInterface();
+        Map<String, Object> mapaValores = new HashMap<>();
+
+        mapaValores.put("id", IdGetter("staff"));
+        mapaValores.put("phone", "000000999");
+        mapaValores.put("email", "Simba@gmail.com");
+        mapaValores.put("name", "Simba Pradera");
+        sqliteInterface.insertInto("staff", mapaValores);
+
+        String[] myStringArray = {"*"};
+        List<HashMap<String, String>> result = sqliteInterface.selectFrom("staff", myStringArray);
+
+        for (HashMap<String, String> hashMap : result) {
+            for (String key : hashMap.keySet()) {
+                System.out.println(key + "---->" + hashMap.get(key));
+            }
+            System.out.println("\n");
+        }
+
+//        result.stream().forEach((string) -> {
+//            System.out.println(string);
+//        });
 
 //            result = sqliteInterface.selectFrom("projects", myStringArray);
 //            result.stream().forEach((string) -> {
 //                System.out.println(string);
 //            });
-            
-            /*sqliteInterface.deleteFrom("staff", "id = 4");
+        /*sqliteInterface.deleteFrom("staff", "id = 4");
             Map<String, Object> mapaValores = new HashMap<>();
             mapaValores.put("nombre", "HDP");
             sqliteInterface.update("staff", mapaValores, "nombre = 'Donald'");
@@ -66,7 +66,7 @@ public class Application {
 
             for (String string : result)
             System.out.println(string);
-            */
+         */
     }
 
 }

@@ -2,6 +2,7 @@ package softpro.Persistence.Database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,14 +18,14 @@ public class SqliteInterface implements BDInterface {
     }
 
     @Override
-    public List<String> selectFrom(String table, String[] params) {
+    public List<HashMap<String, String>> selectFrom(String table, String[] params) {
         return selectFrom(table, params, null);
     }
     
     @Override
-    public List<String> selectFrom(String table, String[] params, String where) {
+    public List<HashMap<String, String>> selectFrom(String table, String[] params, String where) {
          try{
-            List<String> list = new ArrayList<>();
+            List<HashMap<String, String>> list = new ArrayList<>();
             String sql = generateSelect(params, table);
             
             if (where != null)sql += " WHERE "+where;
@@ -82,14 +83,15 @@ public class SqliteInterface implements BDInterface {
         
     }
 
-    private List<String> generateResultList(String sql, List<String> list) throws SQLException {
+    private List<HashMap<String, String>> generateResultList(String sql, List<HashMap<String, String>> list) throws SQLException {
         ResultSet rs = statement.executeQuery(sql);
         ResultSetMetaData rsm = rs.getMetaData();
         while (rs.next()){
-            String texto = "";
-            for (int i = 1; i <= rsm.getColumnCount(); i++)
-                texto += rsm.getColumnName(i)+":  "+rs.getString(rsm.getColumnName(i))+"\n";
-            list.add(texto);
+            HashMap<String, String> mapa = new HashMap<>();
+            for (int i = 1; i <= rsm.getColumnCount(); i++){
+                mapa.put(rsm.getColumnName(i), rs.getString(rsm.getColumnName(i)));
+            }
+            list.add(mapa);
         }
         return list;
     }
