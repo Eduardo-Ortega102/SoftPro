@@ -32,13 +32,13 @@ public class Application {
     private void start() {
 
         SqliteInterface sqliteInterface = new SqliteInterface();
-        Map<String, Object> mapaValores = new HashMap<>();
-
-        mapaValores.put("id", IdGetter("staff"));
-        mapaValores.put("phone", "000000999");
-        mapaValores.put("email", "Simba@gmail.com");
-        mapaValores.put("name", "Simba Pradera");
-        sqliteInterface.insertInto("staff", mapaValores);
+//        Map<String, Object> mapaValores = new HashMap<>();
+//
+//        mapaValores.put("id", IdGetter("staff"));
+//        mapaValores.put("phone", "000000999");
+//        mapaValores.put("email", "Simba@gmail.com");
+//        mapaValores.put("name", "Simba Pradera");
+//        sqliteInterface.insertInto("staff", mapaValores);
 
         String[] myStringArray = {"*"};
         List<HashMap<String, String>> result = sqliteInterface.selectFrom("staff", myStringArray);
