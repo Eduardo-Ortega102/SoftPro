@@ -1,6 +1,6 @@
 package softpro.Model.Factories;
 
-import softpro.Model.UseCase;
+import softpro.Model.Incremental.UseCase;
 
 public interface UseCaseFactory {
 

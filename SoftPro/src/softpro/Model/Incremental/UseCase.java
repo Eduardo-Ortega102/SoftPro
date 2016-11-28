@@ -1,4 +1,4 @@
-package softpro.Model;
+package softpro.Model.Incremental;
 
 public class UseCase {
     private String description;

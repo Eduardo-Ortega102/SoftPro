@@ -1,4 +1,6 @@
-package softpro.Model;
+package softpro.Model.Incremental;
+
+import softpro.Model.Project;
 
 public class IncrementalProject extends Project{
     
@@ -10,6 +12,5 @@ public class IncrementalProject extends Project{
     public String getType() {
         return "Incremental";
     }
-    
     
 }

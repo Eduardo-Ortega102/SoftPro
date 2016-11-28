@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import softpro.Model.IncrementalProject;
+import softpro.Model.Incremental.IncrementalProject;
 import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.Scrum.Sprint;
-import softpro.Model.UseCase;
+import softpro.Model.Incremental.UseCase;
 import softpro.Persistence.Database.SqliteInterface;
 import static softpro.Persistence.IdGetter.IdGetter;
 

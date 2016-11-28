@@ -1,5 +1,6 @@
 package softpro.Model;
 
+import softpro.Model.Incremental.UseCase;
 import java.util.ArrayList;
 import java.util.List;
 import softpro.Model.Factories.RiskFactory;
