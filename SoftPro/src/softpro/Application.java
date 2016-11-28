@@ -39,9 +39,24 @@ public class Application {
 //        mapaValores.put("email", "Simba@gmail.com");
 //        mapaValores.put("name", "Simba Pradera");
 //        sqliteInterface.insertInto("staff", mapaValores);
+//
+        String[] all = {"*"};
+//        List<HashMap<String, String>> result = sqliteInterface.selectFrom("staff", all);
+//        for (HashMap<String, String> hashMap : result) {
+//            for (String key : hashMap.keySet()) {
+//                System.out.println(key + "---->" + hashMap.get(key));
+//            }
+//            System.out.println("\n");
+//        }
 
-        String[] myStringArray = {"*"};
-        List<HashMap<String, String>> result = sqliteInterface.selectFrom("staff", myStringArray);
+//        result.stream().forEach((string) -> {
+//            System.out.println(string);
+//        });
+//            result = sqliteInterface.selectFrom("projects", myStringArray);
+//            result.stream().forEach((string) -> {
+//                System.out.println(string);
+//            });
+        List<HashMap<String, String>> result = sqliteInterface.selectFrom("staff", all, "id = 5");
 
         for (HashMap<String, String> hashMap : result) {
             for (String key : hashMap.keySet()) {
@@ -50,23 +65,6 @@ public class Application {
             System.out.println("\n");
         }
 
-//        result.stream().forEach((string) -> {
-//            System.out.println(string);
-//        });
-
-//            result = sqliteInterface.selectFrom("projects", myStringArray);
-//            result.stream().forEach((string) -> {
-//                System.out.println(string);
-//            });
-        /*sqliteInterface.deleteFrom("staff", "id = 4");
-            Map<String, Object> mapaValores = new HashMap<>();
-            mapaValores.put("nombre", "HDP");
-            sqliteInterface.update("staff", mapaValores, "nombre = 'Donald'");
-            result = sqliteInterface.selectFrom("staff", myStringArray);
-
-            for (String string : result)
-            System.out.println(string);
-         */
     }
 
 }

@@ -89,7 +89,7 @@ public class SqliteInterface implements BDInterface {
         while (rs.next()){
             HashMap<String, String> mapa = new HashMap<>();
             for (int i = 1; i <= rsm.getColumnCount(); i++){
-                mapa.put(rsm.getColumnName(i), rs.getString(rsm.getColumnName(i)));
+                mapa.put(rsm.getColumnName(i).trim(), rs.getString(rsm.getColumnName(i)).trim());
             }
             list.add(mapa);
         }
