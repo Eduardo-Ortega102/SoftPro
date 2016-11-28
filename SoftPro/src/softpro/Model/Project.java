@@ -21,7 +21,15 @@ public abstract class Project implements UseCaseFactory, RiskFactory {
         this.useCaseList = new ArrayList<>();
         this.riskList = new ArrayList<>();
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public abstract String getType();
 
     public List<UseCase> cases() {
@@ -36,7 +44,7 @@ public abstract class Project implements UseCaseFactory, RiskFactory {
     public UseCase create() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     //TODO - Check ID
     public void saveProject() {
         SqliteInterface sqliteInterface = new SqliteInterface();

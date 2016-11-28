@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import org.jfree.ui.RefineryUtilities;
 
-
 public class IncrementalFrame extends javax.swing.JFrame {
     addPhase newPhase = new addPhase(this, true);
     /**
