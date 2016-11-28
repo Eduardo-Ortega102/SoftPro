@@ -38,7 +38,9 @@ CREATE TABLE `sprints` (
 	`id`	INTEGER NOT NULL,
 	`start_date`	TEXT NOT NULL,
 	`end_date`	TEXT,
-	PRIMARY KEY(`id`)
+	`project`	INTEGER NOT NULL,
+	PRIMARY KEY(`id`),
+	FOREIGN KEY(`project`) REFERENCES `project`(`id`)
 );
 CREATE TABLE `sprint_backlog` (
 	`task`	INTEGER NOT NULL,

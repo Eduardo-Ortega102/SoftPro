@@ -4,11 +4,11 @@ package softpro.Model;
 public class User {
     private final int id;
     private String nombre;
-    private int telefono;
+    private String telefono;
     private String email;
     private String rol;
     
-    public User(int id, String nombre, int telefono, String email, String rol){
+    public User(int id, String nombre, String telefono, String email, String rol){
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -20,7 +20,7 @@ public class User {
         this.nombre = nombre;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -40,7 +40,7 @@ public class User {
         return nombre;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -51,5 +51,19 @@ public class User {
     public String getRol() {
         return rol;
     }
+
+    @Override
+    public int hashCode() {
+        return 29 * 3 + this.id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+        return this.id == ((User) obj).id;
+    }
+    
+    
 }
 

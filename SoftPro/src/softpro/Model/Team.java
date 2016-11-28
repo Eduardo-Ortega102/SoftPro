@@ -7,10 +7,8 @@ import java.util.Iterator;
 
 public class Team implements Iterable<User> {
     private final List<User> staff;
-    private final int idProject;
     
-    public Team(int project){
-        this.idProject = project;
+    public Team(){
         this.staff = new ArrayList<>();
     }
     

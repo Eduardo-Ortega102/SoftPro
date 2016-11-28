@@ -1,9 +1,10 @@
-package softpro.Model;
+package softpro.Model.Scrum;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import softpro.Model.Factories.UserStoryFactory;
+import softpro.Model.State;
 
 public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
@@ -47,7 +48,7 @@ public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
     @Override
     public boolean delete(UserStory userStory) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.stories.remove(userStory);
     }
 
 }

@@ -9,10 +9,9 @@ public enum State {
     }
 
     public static State parseState(String string) {
-        for (State state : State.values()) {
+        for (State state : State.values())
             if (state.toString().equals(string)) return state;
-        }
-        return null;
+        throw new RuntimeException("This never happend");
     }
 
     @Override

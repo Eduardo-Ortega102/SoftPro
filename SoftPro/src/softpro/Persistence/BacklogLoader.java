@@ -2,15 +2,16 @@ package softpro.Persistence;
 
 import java.util.HashMap;
 import java.util.List;
-import softpro.Model.ProductBacklog;
-import softpro.Model.ScrumProject;
+import softpro.Model.Scrum.ProductBacklog;
+import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.State;
-import softpro.Model.UserStory;
+import softpro.Model.Scrum.UserStory;
 import softpro.Model.User;
 import softpro.Persistence.Database.SqliteInterface;
 import static java.lang.Integer.valueOf;
+import static java.lang.Integer.valueOf;
 
-public class ProductBacklogLoader {
+public class BacklogLoader {
 
     private static final SqliteInterface sqliteInterface = new SqliteInterface();
 
@@ -18,9 +19,9 @@ public class ProductBacklogLoader {
         return sqliteInterface.selectFrom(table, new String[]{"*"}, filter);
     }
 
-    public static ProductBacklog loadBacklogOf(ScrumProject project) {
+    public static ProductBacklog loadBacklogOf(int project) {
         ProductBacklog backlog = new ProductBacklog();
-        loadUserStories(backlog, select("features", "type = 'UserStory' AND project = " + project.getId()));
+        loadUserStories(backlog, select("features", "type = UserStory AND project = " + project));
         loadTasks(backlog);
         return backlog;
     }
