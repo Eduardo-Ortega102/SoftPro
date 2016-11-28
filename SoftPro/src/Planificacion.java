@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 import softpro.Model.Task;
 import softpro.Model.State;
 import softpro.Persistence.Database.SqliteInterface;
@@ -11,6 +12,7 @@ public class Planificacion extends javax.swing.JPanel {
     /**
      * Creates new form pruebaGeneral
      */
+    int index = 0;
     public Planificacion() {
         initComponents();
     }
@@ -209,13 +211,25 @@ public class Planificacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-       // Task task = null;
+        //Task task = null;
         //task = task.create(1, "blablal", "eblalbla", State.ToDo, null, 1, 1);
         //insertTask(task);
         updateTable();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateTable() {
+        //MOCK IMPLEMENTATION
+        Object[] row = {name.getText(), 
+                        inicioEst.getText(),
+                        finEst.getText(),
+                        inicioReal.getText(),
+                        finReal.getText(),
+                        priority.getText(),
+                        responsable.getText(),
+                        State.ToDo};
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.insertRow(index++, row);
+        //FUTURE IMPLEMENTATION TODO _>
         String[] all = {"*"};
         SqliteInterface sqliteInterface = new SqliteInterface();
         List<HashMap<String, String>> result = sqliteInterface.selectFrom("tasks", all);
@@ -266,5 +280,6 @@ public class Planificacion extends javax.swing.JPanel {
     private javax.swing.JTextField responsable;
     private javax.swing.JTextField state;
     // End of variables declaration//GEN-END:variables
+
 
 }
