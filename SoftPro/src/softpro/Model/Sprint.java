@@ -57,7 +57,7 @@ public class Sprint implements Iterable<Task> {
     
     @Override
     public Iterator<Task> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.taskList.iterator();
     }
 
 }
