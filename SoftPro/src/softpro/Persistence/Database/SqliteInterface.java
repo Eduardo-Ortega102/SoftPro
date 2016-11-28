@@ -84,12 +84,12 @@ public class SqliteInterface implements BDInterface {
     }
 
     private List<HashMap<String, String>> generateResultList(String sql, List<HashMap<String, String>> list) throws SQLException {
-        ResultSet rs = statement.executeQuery(sql);
-        ResultSetMetaData rsm = rs.getMetaData();
-        while (rs.next()){
+        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSetMetaData metadata = resultSet.getMetaData();
+        while (resultSet.next()){
             HashMap<String, String> mapa = new HashMap<>();
-            for (int i = 1; i <= rsm.getColumnCount(); i++){
-                mapa.put(rsm.getColumnName(i).trim(), rs.getString(rsm.getColumnName(i)).trim());
+            for (int i = 1; i <= metadata.getColumnCount(); i++){
+                mapa.put(metadata.getColumnName(i).trim(), resultSet.getString(metadata.getColumnName(i)));
             }
             list.add(mapa);
         }

@@ -3,6 +3,7 @@ package softpro.Persistence;
 import java.util.HashMap;
 import java.util.List;
 import softpro.Persistence.Database.SqliteInterface;
+import static java.lang.Integer.valueOf;
 
 public class IdGetter {
 
@@ -12,7 +13,7 @@ public class IdGetter {
         List<HashMap<String, String>> result = sqliteInterface.selectFrom(table, max_id);
         int maxValue = 0;
         if (result.size() == 1){
-            maxValue = Integer.valueOf(result.get(0).get("MAX(id)"));
+            maxValue = result.get(0).get("MAX(id)") == null ? 0 : valueOf(result.get(0).get("MAX(id)"));
         }
         return (maxValue + 1);
     }

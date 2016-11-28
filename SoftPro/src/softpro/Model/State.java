@@ -1,7 +1,7 @@
 package softpro.Model;
 
 public enum State {
-    ToDo("ToDo"), InProcess("InProcess"), ReadyForTest("ReadyForTest"), Done("ReadyForTest");
+    ToDo("ToDo"), InProcess("InProcess"), ReadyForTest("ReadyForTest"), Done("Done");
     private final String value;
 
     private State(String value) {
