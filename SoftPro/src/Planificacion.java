@@ -1,3 +1,11 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import softpro.Model.Task;
+import softpro.Model.State;
+import softpro.Persistence.Database.SqliteInterface;
+import static softpro.Persistence.IdGetter.IdGetter;
+
 public class Planificacion extends javax.swing.JPanel {
 
     /**
@@ -90,11 +98,9 @@ public class Planificacion extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(36, 36, 36)))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,12 +157,13 @@ public class Planificacion extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)))
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -202,10 +209,39 @@ public class Planificacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
+       // Task task = null;
+        //task = task.create(1, "blablal", "eblalbla", State.ToDo, null, 1, 1);
+        //insertTask(task);
+        updateTable();
     }//GEN-LAST:event_addButtonActionPerformed
 
-
+    private void updateTable() {
+        String[] all = {"*"};
+        SqliteInterface sqliteInterface = new SqliteInterface();
+        List<HashMap<String, String>> result = sqliteInterface.selectFrom("tasks", all);
+        for (HashMap<String, String> hashMap : result) {
+            for (String key : hashMap.keySet()) {
+                System.out.println(key + "---->" + hashMap.get(key));
+            }
+            System.out.println("\n");
+        }
+    }
+    
+    //TODO - Remake this
+    private void insertTask(Task task){
+        Map<String, Object> taskToInsert = new HashMap<>();
+        taskToInsert.put("id", IdGetter("features"));
+        taskToInsert.put("state", State.ToDo);
+        taskToInsert.put("feature", name.getText());
+        taskToInsert.put("estimated_duration", "XXXX");
+        taskToInsert.put("real_duration", "YYYY");
+        taskToInsert.put("responsible", responsable.getText());
+        taskToInsert.put("description", "This is a task about tasks");
+        taskToInsert.put("details", "Details about task");
+        SqliteInterface sqliteInterface = new SqliteInterface();
+        sqliteInterface.insertInto("tasks", taskToInsert);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JTextField finEst;
@@ -230,4 +266,5 @@ public class Planificacion extends javax.swing.JPanel {
     private javax.swing.JTextField responsable;
     private javax.swing.JTextField state;
     // End of variables declaration//GEN-END:variables
+
 }

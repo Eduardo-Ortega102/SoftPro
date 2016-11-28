@@ -1,4 +1,3 @@
-
 import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;

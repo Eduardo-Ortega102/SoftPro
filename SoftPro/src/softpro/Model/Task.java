@@ -1,11 +1,12 @@
-
 package softpro.Model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import softpro.Model.Factories.TaskFactory;
 
-public class Task implements Iterable<Task>{
+public class Task implements Iterable<Task>, TaskFactory{
+
     private final int id;
     private State state;
     private User responsible;
@@ -103,5 +104,40 @@ public class Task implements Iterable<Task>{
         return this.predecesors.iterator();
     }
 
-    
+    @Override
+    public boolean delete(Task task) {
+        return this.predecesors.remove(task);
+    }
+
+    @Override
+    public Task create(int id, String description) {
+        return create(id, description, "");
+    }
+
+    @Override
+    public Task create(int id, String description, String details) {
+        return create(id, description, details, State.ToDo);
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state) {
+        return create(id, description, details, state, null);
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state, User responsible) {
+        return create(id, description, details, state, responsible, 0);
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state, User responsible, int estimated_duration) {
+        return create(id, description, details, state, responsible, estimated_duration, 0);
+    }
+
+    @Override
+    public Task create(int id, String description, String details, State state, User responsible, int estimated_duration, int real_duration) {
+        Task task = new Task(id, state, responsible, description, details, estimated_duration, real_duration);
+        predecesors.add(task);
+        return task;
+    }
 }
