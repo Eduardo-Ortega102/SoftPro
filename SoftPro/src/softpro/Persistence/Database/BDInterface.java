@@ -1,13 +1,14 @@
 package softpro.Persistence.Database;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public interface BDInterface {
 
-    public List<String> selectFrom(String table, String[] params);
+    public List<HashMap<String, String>> selectFrom(String table, String[] params);
 
-    public List<String> selectFrom(String table, String[] params, String where);
+    public List<HashMap<String, String>> selectFrom(String table, String[] params, String where);
 
     public boolean insertInto(String table, Map<String, Object> mapa);
 

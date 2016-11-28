@@ -1,72 +1,97 @@
 package softpro;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import softpro.Model.IncrementalProject;
-import softpro.Model.ScrumProject;
-import softpro.Model.Sprint;
-import softpro.Model.UseCase;
 import softpro.Persistence.Database.SqliteInterface;
 import static softpro.Persistence.IdGetter.IdGetter;
 
 public class Application {
 
+    private static final SqliteInterface sqliteInterface = new SqliteInterface();
+
     public static void main(String[] args) {
-//        ScrumProject scrumProject = new ScrumProject(123, "GS1 SCRUM - TEST");
-//        scrumProject.saveProject();
-        
-        /*for (UseCase useCase : scrumProject.cases()) {
-            
-        }
-        
-        for (Sprint sprint : scrumProject) {
-            
-        }*/
-        
-    
-        
-        
-        
-        //IncrementalProject incrementalProject = new IncrementalProject(134, "GS1 INCREMENTAL - TEST");
-        //incrementalProject.saveProject();
+        int project_id = IdGetter("projects");
+        //load_BD_Mock_Projects(project_id);
+        //load_BD_Mock_UserStories(project_id);
         new Application().start();
     }
 
+    private static void load_BD_Mock_Projects(int project_id) {
+        Map<String, Object> project = new HashMap<>();
+        project.put("id", project_id);
+        project.put("name", "SoftPro");
+        project.put("type", "Scrum");
+        sqliteInterface.insertInto("projects", project);
+
+    }
+
+    private static void load_BD_Mock_UserStories(int project_id) {
+        Map<String, Object> userStory = new HashMap<>();
+        userStory.put("id", IdGetter("features"));
+        userStory.put("project", project_id);
+        userStory.put("description", "Historia 1");
+        userStory.put("details", "Los detalles de la Historia 1");
+        userStory.put("points", 3);
+        userStory.put("state", "ToDo");
+        userStory.put("type", "UserStory");
+        userStory.put("priority", 7);
+        sqliteInterface.insertInto("features", userStory);
+
+        userStory = new HashMap<>();
+        userStory.put("id", IdGetter("features"));
+        userStory.put("project", project_id);
+        userStory.put("description", "Historia 2");
+        userStory.put("details", "Los detalles de la Historia 2");
+        userStory.put("points", 34);
+        userStory.put("state", "ReadyForTest");
+        userStory.put("type", "UserStory");
+        userStory.put("priority", 0);
+        sqliteInterface.insertInto("features", userStory);
+
+        userStory = new HashMap<>();
+        userStory.put("id", IdGetter("features"));
+        userStory.put("project", project_id);
+        userStory.put("description", "Historia 3");
+        userStory.put("details", "Los detalles de la Historia 3");
+        userStory.put("points", 3);
+        userStory.put("state", "InProcess");
+        userStory.put("type", "UserStory");
+        userStory.put("priority", 6);
+        sqliteInterface.insertInto("features", userStory);
+
+        userStory = new HashMap<>();
+        userStory.put("id", IdGetter("features"));
+        userStory.put("project", project_id);
+        userStory.put("description", "Historia 4");
+        userStory.put("details", "Los detalles de la Historia 4");
+        userStory.put("points", 8);
+        userStory.put("state", "Done");
+        userStory.put("type", "UserStory");
+        userStory.put("priority", 7);
+        sqliteInterface.insertInto("features", userStory);
+    }
+
     private void start() {
-                    
-            SqliteInterface sqliteInterface = new SqliteInterface();
-            Map<String, Object> mapaValores = new HashMap<>();
-            
-            mapaValores.put("id", IdGetter("staff"));
-            mapaValores.put("phone", "000000001");
-            mapaValores.put("email", "minnie@gmail.com");
-            mapaValores.put("name", "Minnie Mouse");
-            sqliteInterface.insertInto("staff", mapaValores);
-            
-            
-            String[] myStringArray = {"*"};
-            List<String> result = sqliteInterface.selectFrom("staff", myStringArray);
-            
-            result.stream().forEach((string) -> {
-                System.out.println(string);
-            });
+        System.out.println("\nProyectos.......");
+        String[] all = {"*"};
+        List<HashMap<String, String>> result = sqliteInterface.selectFrom("projects", all);
+        for (HashMap<String, String> hashMap : result) {
+            for (String key : hashMap.keySet()) {
+                System.out.println(key + "---->" + hashMap.get(key));
+            }
+            System.out.println("\n");
+        }
+        
+        System.out.println("\nHistorias.......");
+        result = sqliteInterface.selectFrom("features", all);
+        for (HashMap<String, String> hashMap : result) {
+            for (String key : hashMap.keySet()) {
+                System.out.println(key + "---->" + hashMap.get(key));
+            }
+            System.out.println("\n");
+        }
 
-//            result = sqliteInterface.selectFrom("projects", myStringArray);
-//            result.stream().forEach((string) -> {
-//                System.out.println(string);
-//            });
-            
-            /*sqliteInterface.deleteFrom("staff", "id = 4");
-            Map<String, Object> mapaValores = new HashMap<>();
-            mapaValores.put("nombre", "HDP");
-            sqliteInterface.update("staff", mapaValores, "nombre = 'Donald'");
-            result = sqliteInterface.selectFrom("staff", myStringArray);
-
-            for (String string : result)
-            System.out.println(string);
-            */
     }
 
 }

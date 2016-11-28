@@ -1,7 +1,7 @@
 package softpro.Model.Factories;
 
 import softpro.Model.State;
-import softpro.Model.UserStory;
+import softpro.Model.Scrum.UserStory;
 
 public interface UserStoryFactory {
     

@@ -1,9 +1,12 @@
-package softpro.Model;
+package softpro.Model.Scrum;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import softpro.Model.Factories.TaskFactory;
+import softpro.Model.State;
+import softpro.Model.Task;
+import softpro.Model.User;
 
 public class UserStory implements Iterable<Task>, TaskFactory {
     private String description;
@@ -87,36 +90,38 @@ public class UserStory implements Iterable<Task>, TaskFactory {
 
     @Override
     public boolean delete(Task task) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.taskList.remove(task);
     }
 
     @Override
     public Task create(int id, String description) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return create(id, description, "", State.ToDo, null, 0, 0);
     }
 
     @Override
     public Task create(int id, String description, String details) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return create(id, description, details, State.ToDo, null, 0, 0);
     }
 
     @Override
     public Task create(int id, String description, String details, State state) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return create(id, description, details, state, null, 0, 0);
     }
 
     @Override
     public Task create(int id, String description, String details, State state, User responsible) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return create(id, description, details, state, responsible, 0, 0);
     }
 
     @Override
     public Task create(int id, String description, String details, State state, User responsible, int estimated_duration) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return create(id, description, details, state, responsible, estimated_duration, 0);
     }
 
     @Override
     public Task create(int id, String description, String details, State state, User responsible, int estimated_duration, int real_duration) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Task task = new Task(id, state, responsible, description, details, estimated_duration, real_duration);
+        this.taskList.add(task);
+        return task;
     }
 }

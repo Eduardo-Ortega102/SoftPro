@@ -1,13 +1,13 @@
 package softpro.Model.Factories;
 
-import java.time.Instant;
-import softpro.Model.Sprint;
+import java.time.LocalDate;
+import softpro.Model.Scrum.Sprint;
 
 public interface SprintFactory {
 
-    Sprint create(int id, Instant fecha_inicio);
+    Sprint create(int id, LocalDate fecha_inicio);
 
-    Sprint create(int id, Instant fecha_inicio, Instant fecha_fin);
+    Sprint create(int id, LocalDate fecha_inicio, LocalDate fecha_fin);
     
     boolean delete(Sprint sprint);
 }

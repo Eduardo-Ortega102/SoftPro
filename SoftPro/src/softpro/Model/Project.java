@@ -1,17 +1,16 @@
 package softpro.Model;
 
+import softpro.Model.Incremental.UseCase;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import softpro.Model.Factories.RiskFactory;
 import softpro.Model.Factories.UseCaseFactory;
-import softpro.Persistence.Database.SqliteInterface;
 
 public abstract class Project implements UseCaseFactory, RiskFactory {
 
-    protected String name;
     protected final int id;
+    protected String name;
+    protected Team team;
     protected List<UseCase> useCaseList;
     protected List<Risk> riskList;
 
@@ -21,31 +20,49 @@ public abstract class Project implements UseCaseFactory, RiskFactory {
         this.useCaseList = new ArrayList<>();
         this.riskList = new ArrayList<>();
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public abstract String getType();
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     public List<UseCase> cases() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.useCaseList;
     }
 
     public List<Risk> risks() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.riskList;
     }
 
     @Override
-    public UseCase create() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean delete(UseCase useCase) {
+        return this.useCaseList.remove(useCase);
     }
-    
-    //TODO - Check ID
-    public void saveProject() {
-        SqliteInterface sqliteInterface = new SqliteInterface();
-        Map<String, Object> mapaValores = new HashMap<>();
 
-        mapaValores.put("id", this.id);
-        mapaValores.put("nombre", this.name);
-        mapaValores.put("tipo", this.getType());
-        sqliteInterface.insertInto("project", mapaValores);
+    @Override
+    public UseCase create(int id, String description) {
+        return create(id, description, "");
     }
+
+    @Override
+    public UseCase create(int id, String description, String details) {
+        UseCase useCase = new UseCase(description, details, id);
+        this.useCaseList.add(useCase);
+        return useCase;
+    }
+
 
 }

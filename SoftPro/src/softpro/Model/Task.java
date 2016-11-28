@@ -15,7 +15,7 @@ public class Task implements Iterable<Task>{
     private int real_duration;
     private List<Task> predecesors;
 
-    public Task(int id, State state, int parent, User responsible, String description, String details, int estimated_duration, int real_duration) {
+    public Task(int id, State state, User responsible, String description, String details, int estimated_duration, int real_duration) {
         this.id = id;
         this.state = state;
         this.responsible = responsible;
