@@ -39,12 +39,7 @@ public class ScrumProject extends Project implements Iterable<Sprint>, SprintFac
 
     @Override
     public Sprint create(int id, LocalDate fecha_inicio) {
-        return create(id, fecha_inicio, null);
-    }
-
-    @Override
-    public Sprint create(int id, LocalDate fecha_inicio, LocalDate fecha_fin) {
-        Sprint sprint = new Sprint(id, fecha_inicio, fecha_fin);
+        Sprint sprint = new Sprint(id, fecha_inicio);
         this.sprintList.add(sprint);
         return sprint;
     }

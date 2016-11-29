@@ -19,20 +19,15 @@ private static final SqliteInterface sqliteInterface = new SqliteInterface();
     }
     
     public static Project loadScrumProject(int id, String name) {
-        Project project = new ScrumProject(id, name, BacklogLoader.loadBacklogOf(id));
+        ScrumProject project = new ScrumProject(id, name);
         project.setTeam(TeamLoader.loadTeamOf(id));
-        loadUseCase(project, select("features", "type = UseCase AND project = " + id));
-        loadRisks(project, select("risks", "project = " + id));
+        BacklogLoader.loadBacklogOf(project);
+        //loadRisks(project, select("risks", "project = " + id));
         return project;
     }
 
-    private static void loadUseCase(Project project, List<HashMap<String, String>> list) {
-        for (HashMap<String, String> map : list)
-            project.create(Integer.valueOf(map.get("id")), map.get("description"), map.get("details"));
-    }
-
     private static void loadRisks(Project project, List<HashMap<String, String>> select) {
-        //throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

@@ -4,20 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import softpro.Model.Task;
 
-public class Sprint implements Iterable<Task> {
+public class Sprint implements Iterable<UserStory> {
 
     private final int id;
     private LocalDate fecha_inicio;
-    private LocalDate fecha_fin;
-    private List<Task> taskList;
+    private final List<UserStory> userStoryList;
 
-    public Sprint(int id, LocalDate fecha_inicio, LocalDate fecha_fin) {
+    public Sprint(int id, LocalDate fecha_inicio) {
         this.id = id;
         this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = fecha_fin;
-        this.taskList = new ArrayList<>();
+        this.userStoryList = new ArrayList<>();
     }
 
     public int getId() {
@@ -33,28 +30,20 @@ public class Sprint implements Iterable<Task> {
     }
 
     public LocalDate getFecha_fin() {
-        return fecha_fin;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void setFecha_fin(LocalDate fecha_fin) {
-        this.fecha_fin = fecha_fin;
-    }
-    
-    public void addTask(Task task) {
-        this.taskList.add(task);
+    public void addUserStory(UserStory task) {
+        this.userStoryList.add(task);
     }
 
-    public void removeTask(Task task) {
-        this.taskList.remove(task);
+    public void removeUserStory(UserStory task) {
+        this.userStoryList.remove(task);
     }
 
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
-    
     @Override
-    public Iterator<Task> iterator() {
-        return this.taskList.iterator();
+    public Iterator<UserStory> iterator() {
+        return this.userStoryList.iterator();
     }
     
     @Override

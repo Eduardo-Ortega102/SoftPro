@@ -7,25 +7,12 @@ CREATE TABLE `teams` (
 	FOREIGN KEY(`project`) REFERENCES projects(id),
 	FOREIGN KEY(`staff`) REFERENCES staff(id)
 );
-CREATE TABLE "tasks" (
-	`id`	INTEGER NOT NULL,
-	`state`	TEXT NOT NULL,
-	`feature`	INTEGER NOT NULL,
-	`estimated_duration`	INTEGER,
-	`real_duration`	INTEGER,
-	`responsible`	INTEGER,
-	`description`	TEXT NOT NULL,
-	`details`	TEXT,
-	PRIMARY KEY(`id`),
-	FOREIGN KEY(`feature`) REFERENCES `features`(`id`),
-	FOREIGN KEY(`responsible`) REFERENCES `staff`(`id`)
-);
-CREATE TABLE `task_predecessors` (
-	`task`	INTEGER NOT NULL,
+CREATE TABLE "story_predecessors" (
+	`story`	INTEGER NOT NULL,
 	`predecessor`	INTEGER NOT NULL,
-	PRIMARY KEY(`task`,`predecessor`),
-	FOREIGN KEY(`task`) REFERENCES task(id),
-	FOREIGN KEY(`predecessor`) REFERENCES task(id)
+	PRIMARY KEY(`story`,`predecessor`),
+	FOREIGN KEY(`story`) REFERENCES `feature`(`id`),
+	FOREIGN KEY(`predecessor`) REFERENCES `feature`(`id`)
 );
 CREATE TABLE "staff" (
 	`id`	INTEGER NOT NULL,
@@ -34,20 +21,20 @@ CREATE TABLE "staff" (
 	`email`	TEXT NOT NULL UNIQUE,
 	PRIMARY KEY(`id`)
 );
-CREATE TABLE `sprints` (
+
+CREATE TABLE "sprints" (
 	`id`	INTEGER NOT NULL,
 	`start_date`	TEXT NOT NULL,
-	`end_date`	TEXT,
 	`project`	INTEGER NOT NULL,
 	PRIMARY KEY(`id`),
 	FOREIGN KEY(`project`) REFERENCES `project`(`id`)
 );
-CREATE TABLE `sprint_backlog` (
-	`task`	INTEGER NOT NULL,
+CREATE TABLE "sprint_backlog" (
+	`story`	INTEGER NOT NULL,
 	`sprint`	INTEGER NOT NULL,
-	PRIMARY KEY(`task`,`sprint`),
-	FOREIGN KEY(`task`) REFERENCES tasks(id),
-	FOREIGN KEY(`sprint`) REFERENCES sprints(id)
+	PRIMARY KEY(`story`,`sprint`),
+	FOREIGN KEY(`story`) REFERENCES `features`(`id`),
+	FOREIGN KEY(`sprint`) REFERENCES `sprints`(`id`)
 );
 CREATE TABLE `risks` (
 	`id`	INTEGER NOT NULL,
@@ -72,7 +59,9 @@ CREATE TABLE "features" (
 	`points`	INTEGER,
 	`priority`	INTEGER,
 	`details`	TEXT,
+	`responsible`	TEXT,
 	PRIMARY KEY(`id`),
-	FOREIGN KEY(`project`) REFERENCES `projects`(`id`)
+	FOREIGN KEY(`project`) REFERENCES `projects`(`id`),
+	FOREIGN KEY(`responsible`) REFERENCES staff(id)
 );
 COMMIT;

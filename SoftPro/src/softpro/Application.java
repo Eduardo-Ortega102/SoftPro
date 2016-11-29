@@ -11,7 +11,7 @@ public class Application {
     private static final SqliteInterface sqliteInterface = new SqliteInterface();
 
     public static void main(String[] args) {
-        int project_id = IdGetter("projects");
+        //int project_id = IdGetter("projects");
         //load_BD_Mock_Projects(project_id);
         //load_BD_Mock_UserStories(project_id);
         new Application().start();
@@ -35,6 +35,7 @@ public class Application {
         userStory.put("points", 3);
         userStory.put("state", "ToDo");
         userStory.put("type", "UserStory");
+        userStory.put("responsible", "unset");
         userStory.put("priority", 7);
         sqliteInterface.insertInto("features", userStory);
 
@@ -46,6 +47,7 @@ public class Application {
         userStory.put("points", 34);
         userStory.put("state", "ReadyForTest");
         userStory.put("type", "UserStory");
+        userStory.put("responsible", "unset");
         userStory.put("priority", 0);
         sqliteInterface.insertInto("features", userStory);
 
@@ -57,6 +59,7 @@ public class Application {
         userStory.put("points", 3);
         userStory.put("state", "InProcess");
         userStory.put("type", "UserStory");
+        userStory.put("responsible", "unset");
         userStory.put("priority", 6);
         sqliteInterface.insertInto("features", userStory);
 
@@ -68,6 +71,7 @@ public class Application {
         userStory.put("points", 8);
         userStory.put("state", "Done");
         userStory.put("type", "UserStory");
+        userStory.put("responsible", "unset");
         userStory.put("priority", 7);
         sqliteInterface.insertInto("features", userStory);
     }

@@ -5,10 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import softpro.Model.Factories.UserStoryFactory;
 import softpro.Model.State;
+import softpro.Model.User;
 
 public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
-    private final List<UserStory> stories; 
+    private final List<UserStory> stories;
 
     public ProductBacklog() {
         this.stories = new ArrayList<>();
@@ -41,7 +42,12 @@ public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
     @Override
     public UserStory create(int id, String description, String details, int points, int prioridad, State state) {
-        UserStory story = new UserStory(description, details, points, id, prioridad, state);
+        return create(id, description, details, points, prioridad, state, null);
+    }
+
+    @Override
+    public UserStory create(int id, String description, String details, int points, int prioridad, State state, User responsible) {
+        UserStory story = new UserStory(id, description, details, points, prioridad, state, responsible);
         stories.add(story);
         return story;
     }
@@ -49,6 +55,12 @@ public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
     @Override
     public boolean delete(UserStory userStory) {
         return this.stories.remove(userStory);
+    }
+
+    public UserStory findStory(int id) {
+        for (UserStory story : stories)
+            if (story.getId() == id) return story;
+        return null;
     }
 
 }

@@ -3,28 +3,28 @@ package softpro.Model.Scrum;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import softpro.Model.Factories.TaskFactory;
 import softpro.Model.State;
-import softpro.Model.Task;
 import softpro.Model.User;
 
-public class UserStory implements Iterable<Task>, TaskFactory {
+public class UserStory implements Iterable<UserStory> {
     private String description;
     private String details;
     private State state;
     private final int id;
     private int points;
     private int priority;
-    private List<Task> taskList;
-
-    public UserStory(String description, String details, int points, int id, int prioridad, State state) {
+    private User responsible;
+    private final List<UserStory> predecessors;
+                     
+    public UserStory(int id, String description, String details, int points, int priority, State state, User responsible) {
         this.description = description;
         this.details = details;
         this.state = state;
         this.id = id;
         this.points = points;
-        this.priority = prioridad;
-        this.taskList = new ArrayList<>();
+        this.priority = priority;
+        this.responsible = responsible;
+        this.predecessors = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -49,6 +49,14 @@ public class UserStory implements Iterable<Task>, TaskFactory {
 
     public int getPriority() {
         return priority;
+    }
+
+    public User getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(User responsible) {
+        this.responsible = responsible;
     }
 
     public void setName(String name) {
@@ -84,44 +92,15 @@ public class UserStory implements Iterable<Task>, TaskFactory {
     }
 
     @Override
-    public Iterator<Task> iterator() {
-        return this.taskList.iterator();
+    public Iterator<UserStory> iterator() {
+        return this.predecessors.iterator();
     }
 
-    @Override
-    public boolean delete(Task task) {
-        return this.taskList.remove(task);
+    public boolean addPredecessor(UserStory story){
+        return predecessors.add(story);
     }
-
-    @Override
-    public Task create(int id, String description) {
-        return create(id, description, "", State.ToDo, null, 0, 0);
-    }
-
-    @Override
-    public Task create(int id, String description, String details) {
-        return create(id, description, details, State.ToDo, null, 0, 0);
-    }
-
-    @Override
-    public Task create(int id, String description, String details, State state) {
-        return create(id, description, details, state, null, 0, 0);
-    }
-
-    @Override
-    public Task create(int id, String description, String details, State state, User responsible) {
-        return create(id, description, details, state, responsible, 0, 0);
-    }
-
-    @Override
-    public Task create(int id, String description, String details, State state, User responsible, int estimated_duration) {
-        return create(id, description, details, state, responsible, estimated_duration, 0);
-    }
-
-    @Override
-    public Task create(int id, String description, String details, State state, User responsible, int estimated_duration, int real_duration) {
-        Task task = new Task(id, state, responsible, description, details, estimated_duration, real_duration);
-        this.taskList.add(task);
-        return task;
+    
+    public boolean removePredecessor(UserStory story){
+        return predecessors.remove(story);
     }
 }
