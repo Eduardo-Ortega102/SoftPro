@@ -20,6 +20,7 @@ private static final SqliteInterface sqliteInterface = new SqliteInterface();
     
     public static Project loadScrumProject(int id, String name) {
         ScrumProject project = new ScrumProject(id, name);
+        //---Cambiar: el projecto es el que crea el TEAM (TeamFactory)
         project.setTeam(TeamLoader.loadTeamOf(id));
         BacklogLoader.loadBacklogOf(project);
         //loadRisks(project, select("risks", "project = " + id));

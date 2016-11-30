@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import softpro.Persistence.Database.SqliteInterface;
-import static softpro.Persistence.IdGetter.IdGetter;
+import static softpro.Persistence.IdGenerator.generateIdForTable;
 
 public class Application {
 
     private static final SqliteInterface sqliteInterface = new SqliteInterface();
 
     public static void main(String[] args) {
-        //int project_id = IdGetter("projects");
+        //int project_id = IdGenerator("projects");
         //load_BD_Mock_Projects(project_id);
         //load_BD_Mock_UserStories(project_id);
         new Application().start();
@@ -28,7 +28,7 @@ public class Application {
 
     private static void load_BD_Mock_UserStories(int project_id) {
         Map<String, Object> userStory = new HashMap<>();
-        userStory.put("id", IdGetter("features"));
+        userStory.put("id", generateIdForTable("features"));
         userStory.put("project", project_id);
         userStory.put("description", "Historia 1");
         userStory.put("details", "Los detalles de la Historia 1");
@@ -40,7 +40,7 @@ public class Application {
         sqliteInterface.insertInto("features", userStory);
 
         userStory = new HashMap<>();
-        userStory.put("id", IdGetter("features"));
+        userStory.put("id", generateIdForTable("features"));
         userStory.put("project", project_id);
         userStory.put("description", "Historia 2");
         userStory.put("details", "Los detalles de la Historia 2");
@@ -52,7 +52,7 @@ public class Application {
         sqliteInterface.insertInto("features", userStory);
 
         userStory = new HashMap<>();
-        userStory.put("id", IdGetter("features"));
+        userStory.put("id", generateIdForTable("features"));
         userStory.put("project", project_id);
         userStory.put("description", "Historia 3");
         userStory.put("details", "Los detalles de la Historia 3");
@@ -64,7 +64,7 @@ public class Application {
         sqliteInterface.insertInto("features", userStory);
 
         userStory = new HashMap<>();
-        userStory.put("id", IdGetter("features"));
+        userStory.put("id", generateIdForTable("features"));
         userStory.put("project", project_id);
         userStory.put("description", "Historia 4");
         userStory.put("details", "Los detalles de la Historia 4");

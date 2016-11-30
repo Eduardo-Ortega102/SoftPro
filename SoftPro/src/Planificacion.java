@@ -4,7 +4,7 @@ import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import softpro.Model.State;
 import softpro.Persistence.Database.SqliteInterface;
-import static softpro.Persistence.IdGetter.IdGetter;
+import static softpro.Persistence.IdGenerator.generateIdForTable;
 
 public class Planificacion extends javax.swing.JPanel {
 
@@ -243,7 +243,7 @@ public class Planificacion extends javax.swing.JPanel {
 //    //TODO - Remake this
 //    private void insertTask(Task task){
 //        Map<String, Object> taskToInsert = new HashMap<>();
-//        taskToInsert.put("id", IdGetter("features"));
+//        taskToInsert.put("id", IdGenerator("features"));
 //        taskToInsert.put("state", State.ToDo);
 //        taskToInsert.put("feature", name.getText());
 //        taskToInsert.put("estimated_duration", "XXXX");

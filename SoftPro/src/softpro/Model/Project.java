@@ -14,6 +14,7 @@ public abstract class Project implements RiskFactory {
     public Project(int id, String name) {
         this.id = id;
         this.name = name;
+        this.team = new Team();
         this.riskList = new ArrayList<>();
     }
 

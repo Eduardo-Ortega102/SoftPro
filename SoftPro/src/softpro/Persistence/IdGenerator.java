@@ -5,9 +5,9 @@ import java.util.List;
 import softpro.Persistence.Database.SqliteInterface;
 import static java.lang.Integer.valueOf;
 
-public class IdGetter {
+public class IdGenerator {
 
-    public static int IdGetter(String table) {
+    public static int generateIdForTable(String table) {
         SqliteInterface sqliteInterface = new SqliteInterface();
         String[] max_id = {"MAX(id)"};
         List<HashMap<String, String>> result = sqliteInterface.selectFrom(table, max_id);
