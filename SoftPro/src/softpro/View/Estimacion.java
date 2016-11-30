@@ -1,3 +1,5 @@
+package softpro.View;
+
 
 import org.jfree.ui.RefineryUtilities;
 

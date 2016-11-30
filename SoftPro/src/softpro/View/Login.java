@@ -1,3 +1,5 @@
+package softpro.View;
+
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
 import java.text.ParseException;
