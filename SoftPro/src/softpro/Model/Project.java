@@ -32,10 +32,6 @@ public abstract class Project implements RiskFactory {
         return team;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     public List<Risk> risks() {
         return this.riskList;
     }

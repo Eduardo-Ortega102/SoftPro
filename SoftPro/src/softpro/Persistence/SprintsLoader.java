@@ -9,6 +9,7 @@ import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.Scrum.Sprint;
 import softpro.Model.Scrum.UserStory;
 import softpro.Persistence.Database.SqliteInterface;
+import static java.lang.Integer.valueOf;
 
 public class SprintsLoader {
 
@@ -36,6 +37,6 @@ public class SprintsLoader {
     private static void addStoriesOf(ProductBacklog backlog, Sprint sprint) {
         for (HashMap<String, String> map : select("sprint_backlog", "sprint = " + sprint.getId())) 
             for (UserStory story : backlog) 
-                    if (story.getId() == valueOf(map.get("story"))) sprint.addUserStory(story);
+                    if (story.getId() == valueOf(map.get("story"))) sprint.addStory(story);
     }
 }

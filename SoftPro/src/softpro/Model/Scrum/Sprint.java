@@ -33,7 +33,7 @@ public class Sprint implements Iterable<UserStory> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void addUserStory(UserStory task) {
+    public void addStory(UserStory task) {
         this.userStoryList.add(task);
     }
 

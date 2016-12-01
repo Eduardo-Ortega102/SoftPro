@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import softpro.Model.State;
 import softpro.Persistence.Database.SqliteInterface;
-import static softpro.Persistence.IdGenerator.generateIdForTable;
+import static softpro.Persistence.IdGenerator.generateNewIdForTable;
 
 public class Planificacion extends javax.swing.JPanel {
 

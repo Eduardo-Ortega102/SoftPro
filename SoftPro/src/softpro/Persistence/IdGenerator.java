@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import softpro.Persistence.Database.SqliteInterface;
 import static java.lang.Integer.valueOf;
+import static java.lang.Integer.valueOf;
 
 public class IdGenerator {
 
-    public static int generateIdForTable(String table) {
+    public static int generateNewIdForTable(String table) {
         SqliteInterface sqliteInterface = new SqliteInterface();
         String[] max_id = {"MAX(id)"};
         List<HashMap<String, String>> result = sqliteInterface.selectFrom(table, max_id);
