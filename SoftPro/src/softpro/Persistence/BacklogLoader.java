@@ -34,7 +34,7 @@ public class BacklogLoader {
     }
 
     private static User getUser(String responsible, Team team) {
-        return team.find(responsible);
+        return team.findUser(valueOf(responsible));
     }
 
     private static void loadStoriesPredecessors(ProductBacklog backlog) {

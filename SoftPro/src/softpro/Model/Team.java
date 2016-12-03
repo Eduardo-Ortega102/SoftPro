@@ -26,10 +26,9 @@ public class Team implements Iterable<User> {
         return this.staff.iterator();
     }
 
-    public User find(String id) {
-        if (id.equals("unset")) return null;
+    public User findUser(int id) {
         for (User user : staff)
             if (user.getId() == valueOf(id)) return user;
-        throw new RuntimeException("Unknowed user '" + id + "' in project");
+        return null;
     }
 }
