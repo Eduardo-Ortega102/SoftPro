@@ -13,12 +13,12 @@ public class Team implements Iterable<User> {
         this.staff = new ArrayList<>();
     }
     
-    public void addUser(User user){
-        this.staff.add(user);
+    public boolean addUser(User user){
+        return this.staff.add(user);
     }
     
-    public void removeUser(User user){
-        this.staff.remove(user);
+    public boolean removeUser(User user){
+        return this.staff.remove(user);
     }
     
     @Override
