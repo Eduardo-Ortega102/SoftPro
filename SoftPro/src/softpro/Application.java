@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import softpro.Controller.CommandBuilder;
-import softpro.Controller.CustomDate;
 import softpro.Model.Scrum.ScrumProject;
 import softpro.Persistence.Database.SqliteInterface;
 import softpro.View.Operation;
@@ -15,14 +14,10 @@ public class Application {
     private static final SqliteInterface sqliteInterface = new SqliteInterface();
 
     public static void main(String[] args) {
-        int number_of_weeks = 5;
-        CustomDate date = new CustomDate();
-        System.out.println(  " Inicio Sprint: " + date.now().toString() +
-                             " Fin Sprint: "    + date.deliverDate(number_of_weeks).toString());
         //int project_id = IdGenerator("projects");
         //load_BD_Mock_Projects(project_id);
         //load_BD_Mock_UserStories(project_id);
-        //CommandBuilder.createCommands();
+        CommandBuilder.createCommands();
         //new Application().start();
     }
 
