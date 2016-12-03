@@ -1,26 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package softpro.Controller.Operations;
 
+import static java.lang.Integer.valueOf;
 import java.util.HashMap;
 import softpro.Model.Scrum.ScrumProject;
+import softpro.Model.Team;
+import softpro.Model.User;
+import softpro.Persistence.Database.SqliteInterface;
 import softpro.View.ActionOverProject;
 
-/**
- *
- * @author Mictlan
- */
 public class RemoveUserFromTeam implements ActionOverProject<ScrumProject> {
-
-    public RemoveUserFromTeam() {
-    }
 
     @Override
     public boolean execute(ScrumProject project, HashMap<String, String> arguments) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Team team = project.getTeam();
+        User user = team.findUser(valueOf(arguments.get("userID")));
+        return user == null || !couldRemoveFromDatabase(user, project) ? false :
+               team.removeUser(user);
+    }
+
+    private boolean couldRemoveFromDatabase(User user, ScrumProject project) {
+        return new SqliteInterface().deleteFrom("teams", 
+                "staff = " + user.getId() + " AND project = " + project.getId());
     }
     
 }
