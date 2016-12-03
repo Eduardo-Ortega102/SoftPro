@@ -16,7 +16,7 @@ public class AddStoryToSprint implements ActionOverProject<ScrumProject> {
     public boolean execute(ScrumProject project, HashMap<String, String> arguments) {
         Sprint sprint = project.findSprint(valueOf(arguments.get("sprintID")));
         UserStory story = project.getBacklog().findStory(valueOf(arguments.get("storyID")));
-        return sprint == null || story == null || 
+        return sprint == null || story == null ? false : 
                sprint.findStory(valueOf(arguments.get("storyID"))) != null ? false : 
                !couldInsertIntoDatabase(story, sprint) ? false : 
                sprint.addStory(story);

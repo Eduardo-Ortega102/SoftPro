@@ -14,7 +14,7 @@ public class AddPredecessorOfStory implements ActionOverProject<ScrumProject> {
     public boolean execute(ScrumProject project, HashMap<String, String> arguments) {
         UserStory story = project.getBacklog().findStory(valueOf(arguments.get("storyID")));
         UserStory predecessor = project.getBacklog().findStory(valueOf(arguments.get("predecessorID")));
-        return story == null || predecessor == null || 
+        return story == null || predecessor == null ? false :
                story.findPredecessor(valueOf(arguments.get("predecessorID"))) != null ? false : 
                !couldInsertIntoDatabase(story, predecessor) ? false:
                story.addPredecessor(predecessor);

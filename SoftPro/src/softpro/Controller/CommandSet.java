@@ -39,7 +39,7 @@ public class CommandSet implements ActionSet {
 
         commandsOverProject.put(Operation.REMOVE_PREDECESSOR_OF_STORY, new RemovePredecessorOfStory());//------
         commandsOverProject.put(Operation.REMOVE_STORY_FROM_SPRINT, new RemoveStoryFromSprint());
-        commandsOverProject.put(Operation.REMOVE_USER_FROM_TEAM, new RemoveUserFromTeam());
+        commandsOverProject.put(Operation.REMOVE_USER_FROM_TEAM, new RemoveUserFromTeam());//------
     }
 
     private void addAdministrativeActions() {
