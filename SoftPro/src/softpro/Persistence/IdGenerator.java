@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import softpro.Persistence.Database.SqliteInterface;
 import static java.lang.Integer.valueOf;
-import static java.lang.Integer.valueOf;
 
 public class IdGenerator {
 
