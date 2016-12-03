@@ -16,15 +16,15 @@ public class CommandSet implements ActionSet {
     public CommandSet() {
         this.commandsOverProject = new HashMap<>();
         this.administrativeCommands = new HashMap<>();
-        addProjectCommands();
-        addAdministrativeCommands();
+        addProjectActions();
+        addAdministrativeActions();
     }
 
-    private void addProjectCommands() {
-        commandsOverProject.put(Operation.ADD_PREDECESSOR_OF_STORY, new AddPredecessorOfStory());
+    private void addProjectActions() {
+        commandsOverProject.put(Operation.ADD_PREDECESSOR_OF_STORY, new AddPredecessorOfStory());//------
         commandsOverProject.put(Operation.ADD_STORY_TO_BACKLOG, new AddStoryToBacklog());
-        commandsOverProject.put(Operation.ADD_STORY_TO_SPRINT, new AddStoryToSprint());
-        commandsOverProject.put(Operation.ADD_USER_TO_TEAM, new AddUserToTeam());
+        commandsOverProject.put(Operation.ADD_STORY_TO_SPRINT, new AddStoryToSprint());//------
+        commandsOverProject.put(Operation.ADD_USER_TO_TEAM, new AddUserToTeam());//------
 
         commandsOverProject.put(Operation.CREATE_SPRINT, new CreateSprint());
         commandsOverProject.put(Operation.CREATE_RISK, new CreateRisk());
@@ -37,12 +37,12 @@ public class CommandSet implements ActionSet {
         commandsOverProject.put(Operation.DELETE_SPRINT, new DeleteSprint());
         commandsOverProject.put(Operation.DELETE_STORY, new DeleteStory());
 
-        commandsOverProject.put(Operation.REMOVE_PREDECESSOR_OF_STORY, new RemovePredecessorOfStory());
+        commandsOverProject.put(Operation.REMOVE_PREDECESSOR_OF_STORY, new RemovePredecessorOfStory());//------
         commandsOverProject.put(Operation.REMOVE_STORY_FROM_SPRINT, new RemoveStoryFromSprint());
         commandsOverProject.put(Operation.REMOVE_USER_FROM_TEAM, new RemoveUserFromTeam());
     }
 
-    private void addAdministrativeCommands() {
+    private void addAdministrativeActions() {
         administrativeCommands.put(Operation.CREATE_PROJECT, new CreateProject());
         administrativeCommands.put(Operation.CREATE_USER, new CreateUser());
         administrativeCommands.put(Operation.MODIFY_USER, new ModifyUser());
@@ -51,12 +51,12 @@ public class CommandSet implements ActionSet {
     }
 
     @Override
-    public ActionOverProject getProjectOperation(Operation operation) {
+    public ActionOverProject getProjectAction(Operation operation) {
         return commandsOverProject.get(operation);
     }
 
     @Override
-    public AdministrativeAction getAdministrativeOperation(Operation operation) {
+    public AdministrativeAction getAdministrativeAction(Operation operation) {
         return administrativeCommands.get(operation);
     }
     

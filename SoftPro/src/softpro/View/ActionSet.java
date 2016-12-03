@@ -2,7 +2,7 @@ package softpro.View;
 
 public interface ActionSet {
 
-    ActionOverProject getProjectOperation(Operation operation);
+    ActionOverProject getProjectAction(Operation operation);
 
-    AdministrativeAction getAdministrativeOperation(Operation operation);
+    AdministrativeAction getAdministrativeAction(Operation operation);
 }
