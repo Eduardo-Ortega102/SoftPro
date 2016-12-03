@@ -1,26 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package softpro.Controller.Operations;
 
 import java.util.HashMap;
+import java.util.Map;
 import softpro.Model.Scrum.ScrumProject;
+import softpro.Model.Scrum.Sprint;
+import softpro.Model.Scrum.UserStory;
+import softpro.Persistence.Database.SqliteInterface;
 import softpro.View.ActionOverProject;
+import static java.lang.Integer.valueOf;
 
-/**
- *
- * @author Mictlan
- */
+
 public class AddStoryToSprint implements ActionOverProject<ScrumProject> {
-
-    public AddStoryToSprint() {
-    }
 
     @Override
     public boolean execute(ScrumProject project, HashMap<String, String> arguments) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Sprint sprint = project.findSprint(valueOf(arguments.get("sprintID")));
+        UserStory story = project.getBacklog().findStory(valueOf(arguments.get("storyID")));
+        return sprint == null || story == null || 
+               sprint.findStory(valueOf(arguments.get("storyID"))) != null ? false : 
+               !couldInsertIntoDatabase(story, sprint) ? false : 
+               sprint.addStory(story);
     }
-    
+
+    private boolean couldInsertIntoDatabase(UserStory story, Sprint sprint) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("story", story.getId());
+        map.put("sprint", sprint.getId());
+        return new SqliteInterface().insertInto("sprint_backlog", map);
+    }
+
 }

@@ -103,4 +103,10 @@ public class UserStory implements Iterable<UserStory> {
     public boolean removePredecessor(UserStory story){
         return predecessors.remove(story);
     }
+
+    public UserStory findPredecessor(int id) {
+        for (UserStory predecessor : predecessors)
+            if (predecessor.getId() == id) return predecessor;
+        return null;
+    }
 }

@@ -33,12 +33,18 @@ public class Sprint implements Iterable<UserStory> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void addStory(UserStory task) {
-        this.userStoryList.add(task);
+    public boolean addStory(UserStory story) {
+        return this.userStoryList.add(story);
     }
 
-    public void removeUserStory(UserStory task) {
-        this.userStoryList.remove(task);
+    public boolean removeUserStory(UserStory story) {
+        return this.userStoryList.remove(story);
+    }
+    
+    public UserStory findStory(int id){
+        for (UserStory story : userStoryList)
+            if (story.getId() == id) return story;
+        return null;
     }
 
     @Override

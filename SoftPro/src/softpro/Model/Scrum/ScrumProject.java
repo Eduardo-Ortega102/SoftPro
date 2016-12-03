@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import softpro.Model.Factories.SprintFactory;
 import softpro.Model.Project;
-import softpro.Model.User;
 
 public class ScrumProject extends Project implements Iterable<Sprint>, SprintFactory {
 
@@ -49,13 +48,11 @@ public class ScrumProject extends Project implements Iterable<Sprint>, SprintFac
     public boolean delete(Sprint sprint) {
         return this.sprintList.remove(sprint);
     }
-
-    public void addUser(User user) {
-        this.team.addUser(user);
-    }
     
-    public void removeUser(User user) {
-        this.team.removeUser(user);
+    public Sprint findSprint(int id){
+        for (Sprint sprint : sprintList) 
+            if (sprint.getId() == id) return sprint;
+        return null;
     }
 
 }
