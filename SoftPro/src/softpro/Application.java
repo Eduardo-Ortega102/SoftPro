@@ -3,7 +3,7 @@ package softpro;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import softpro.Controller.CommandBuilder;
+import softpro.Controller.CommandSet;
 import softpro.Model.Scrum.ScrumProject;
 import softpro.Persistence.Database.SqliteInterface;
 import softpro.View.Operation;
@@ -17,7 +17,7 @@ public class Application {
         //int project_id = IdGenerator("projects");
         //load_BD_Mock_Projects(project_id);
         //load_BD_Mock_UserStories(project_id);
-        CommandBuilder.createCommands();
+        CommandSet set = new CommandSet();
         //new Application().start();
     }
 
