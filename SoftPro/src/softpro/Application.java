@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import softpro.Controller.CommandSet;
+import softpro.Model.Project;
 import softpro.Model.Scrum.ScrumProject;
+import softpro.Model.Scrum.UserStory;
 import softpro.Persistence.Database.SqliteInterface;
+import softpro.Model.Scrum.UserStory;
 import softpro.View.Operation;
 import static softpro.Persistence.IdGenerator.generateNewIdForTable;
+import softpro.Persistence.ProjectLoader;
 import softpro.View.ActionSet;
 
 public class Application {
@@ -15,11 +19,8 @@ public class Application {
     private static final SqliteInterface sqliteInterface = new SqliteInterface();
 
     public static void main(String[] args) {
-        //int project_id = IdGenerator("projects");
-        //load_BD_Mock_Projects(project_id);
-        //load_BD_Mock_UserStories(project_id);
         ActionSet set = new CommandSet();
-        //new Application().start();
+        new Application().start();
     }
 
     private static void load_BD_Mock_Projects(int project_id) {
@@ -82,23 +83,22 @@ public class Application {
     }
 
     private void start() {
-        System.out.println("\nProyectos.......");
-        String[] all = {"*"};
-        List<HashMap<String, String>> result = sqliteInterface.selectFrom("projects", all);
-        for (HashMap<String, String> hashMap : result) {
-            for (String key : hashMap.keySet()) {
-                System.out.println(key + "---->" + hashMap.get(key));
-            }
-            System.out.println("\n");
-        }
-        
+        ScrumProject project = (ScrumProject) ProjectLoader.loadScrumProject(2);
+        System.out.println("\nProyecto.......");
+        System.out.println(project.getId());
+        System.out.println(project.getName());
+        System.out.println(project.getType());
+
         System.out.println("\nHistorias.......");
-        result = sqliteInterface.selectFrom("features", all);
-        for (HashMap<String, String> hashMap : result) {
-            for (String key : hashMap.keySet()) {
-                System.out.println(key + "---->" + hashMap.get(key));
-            }
-            System.out.println("\n");
+        for (UserStory story : project.getBacklog()) {
+            System.out.println(story.getId());
+            System.out.println(story.getDescription());
+            System.out.println(story.getDetails());
+            System.out.println(story.getPoints());
+            System.out.println(story.getPriority());
+            System.out.println(story.getResponsible());
+            System.out.println(story.getState());
+            System.out.println(".....");
         }
 
     }

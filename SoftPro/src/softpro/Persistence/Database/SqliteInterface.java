@@ -29,7 +29,7 @@ public class SqliteInterface implements BDInterface {
             String sql = generateSelect(params, table);
             
             if (where != null)sql += " WHERE "+ where;
-           
+            
             return generateResultList(sql, list);
         }catch (SQLException ex) {
              ex.printStackTrace();

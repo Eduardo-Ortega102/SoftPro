@@ -21,8 +21,8 @@ public class ProjectLoader {
         return null;
     }
 
-    public static Project loadScrumProject(int id, String name) {
-        ScrumProject project = new ScrumProject(id, name);
+    public static Project loadScrumProject(int id) {
+        ScrumProject project = new ScrumProject(id, getProjectName(id));
         for (User user : getUsersOfProject(select("teams", "project = " + id)))
             project.addUser(user);
         //loadRisks(project, select("risks", "project = " + id));
@@ -30,6 +30,10 @@ public class ProjectLoader {
         return project;
     }
 
+    private static String getProjectName(int id) {
+        return select("projects", "id = " + id).get(0).get("name");
+    }
+    
     private static List<User> getUsersOfProject(List<HashMap<String, String>> list) {
         List<User> users = new ArrayList<>();
         for (HashMap<String, String> map : list) 
@@ -42,5 +46,7 @@ public class ProjectLoader {
     private static void loadRisks(Project project, List<HashMap<String, String>> select) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+
 
 }

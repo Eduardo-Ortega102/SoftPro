@@ -20,7 +20,7 @@ public class BacklogLoader {
     }
 
     public static void loadBacklogOf(ScrumProject project) {
-        loadUserStories(project, select("features", "type = UserStory AND project = " + project));
+        loadUserStories(project, select("features", "type = 'UserStory' AND project = " + project.getId()));
         loadStoriesPredecessors(project.getBacklog());
     }
 
@@ -34,6 +34,7 @@ public class BacklogLoader {
     }
 
     private static User getUser(String responsible, Team team) {
+        responsible = responsible.equals(" ") || responsible.equals("unset") ? "-1" : responsible;
         return team.findUser(valueOf(responsible));
     }
 
