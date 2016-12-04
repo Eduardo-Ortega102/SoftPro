@@ -6,6 +6,7 @@ import java.util.Map;
 import softpro.Controller.CommandSet;
 import softpro.Model.Project;
 import softpro.Model.Scrum.ScrumProject;
+import softpro.Model.Scrum.Sprint;
 import softpro.Model.Scrum.UserStory;
 import softpro.Persistence.Database.SqliteInterface;
 import softpro.Model.Scrum.UserStory;
@@ -83,12 +84,24 @@ public class Application {
     }
 
     private void start() {
+//        HashMap<String, Object> arguments = new HashMap<>();
+//        arguments.put("id", 0);
+//        arguments.put("start_date", "2016-12-31");
+//        arguments.put("project", 2);
+//        sqliteInterface.insertInto("sprints", arguments);
+        
         ScrumProject project = ProjectLoader.loadScrumProject(2);
         System.out.println("\nProyecto.......");
         System.out.println(project.getId());
         System.out.println(project.getName());
         System.out.println(project.getType());
-
+        
+        System.out.println("\nSprints.......");
+        for (Sprint sprint : project) {
+            System.out.println(sprint.getId());
+            System.out.println(".....");
+        }
+        
         System.out.println("\nHistorias.......");
         for (UserStory story : project.getBacklog()) {
             System.out.println(story.getId());

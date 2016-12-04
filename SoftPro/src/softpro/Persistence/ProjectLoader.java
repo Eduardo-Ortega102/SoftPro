@@ -27,6 +27,7 @@ public class ProjectLoader {
             project.addUser(user);
         //loadRisks(project, select("risks", "project = " + id));
         BacklogLoader.loadBacklogOf(project);
+        SprintsLoader.loadSprintsOf(project);
         return project;
     }
 
