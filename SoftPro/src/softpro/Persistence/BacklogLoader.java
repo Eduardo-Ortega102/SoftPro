@@ -41,7 +41,7 @@ public class BacklogLoader {
     private static void loadStoriesPredecessors(ProductBacklog backlog) {
         for (UserStory userStory : backlog) 
             for (HashMap<String, String> map : select("story_predecessors", "story = " + userStory.getId())) 
-                userStory.addPredecessor(backlog.findStory(valueOf(map.get("id"))));
+                userStory.addPredecessor(backlog.findStory(valueOf(map.get("predecessor"))));
     }
 
 }

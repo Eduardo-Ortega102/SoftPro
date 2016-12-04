@@ -83,7 +83,7 @@ public class Application {
     }
 
     private void start() {
-        ScrumProject project = (ScrumProject) ProjectLoader.loadScrumProject(2);
+        ScrumProject project = ProjectLoader.loadScrumProject(2);
         System.out.println("\nProyecto.......");
         System.out.println(project.getId());
         System.out.println(project.getName());

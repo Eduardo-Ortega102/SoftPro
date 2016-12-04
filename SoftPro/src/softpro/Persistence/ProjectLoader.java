@@ -21,7 +21,7 @@ public class ProjectLoader {
         return null;
     }
 
-    public static Project loadScrumProject(int id) {
+    public static ScrumProject loadScrumProject(int id) {
         ScrumProject project = new ScrumProject(id, getProjectName(id));
         for (User user : getUsersOfProject(select("teams", "project = " + id)))
             project.addUser(user);
