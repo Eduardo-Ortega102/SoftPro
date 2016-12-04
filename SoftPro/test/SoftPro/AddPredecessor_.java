@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import softpro.Controller.CommandSet;
 import softpro.Model.Scrum.ScrumProject;
-import softpro.Model.Scrum.UserStory;
 import softpro.Persistence.ProjectLoader;
 import softpro.View.ActionSet;
 import softpro.View.Operation;

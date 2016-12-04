@@ -22,22 +22,22 @@ public class ProductBacklog implements Iterable<UserStory>, UserStoryFactory {
 
     @Override
     public UserStory create(int id, String description) {
-        return create(id, description, "", 0, 0, State.ToDo);
+        return create(id, description, "", 0, 0, State.ToDo, null);
     }
 
     @Override
     public UserStory create(int id, String description, String details) {
-        return create(id, description, details, 0, 0, State.ToDo);
+        return create(id, description, details, 0, 0, State.ToDo, null);
     }
 
     @Override
     public UserStory create(int id, String description, String details, int points) {
-        return create(id, description, details, points, 0, State.ToDo);
+        return create(id, description, details, points, 0, State.ToDo, null);
     }
 
     @Override
     public UserStory create(int id, String description, String details, int points, int prioridad) {
-        return create(id, description, details, points, prioridad, State.ToDo);
+        return create(id, description, details, points, prioridad, State.ToDo, null);
     }
 
     @Override

@@ -27,7 +27,8 @@ public class AddStoryToBacklog implements ActionOverProject<ScrumProject> {
         map.put("details", story.getDetails());
         map.put("points", story.getPoints());
         map.put("priority", story.getPriority());
-        map.put("responsible", story.getResponsible().getId());
+        String responsibleID = story.getResponsible() == null ? " " : story.getResponsible().getId() + "";
+        map.put("responsible", responsibleID);
         map.put("state", story.getState().toString());
         return new SqliteInterface().insertInto("features", map);
     }
