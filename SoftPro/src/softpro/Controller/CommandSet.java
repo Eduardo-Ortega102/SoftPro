@@ -22,7 +22,7 @@ public class CommandSet implements ActionSet {
 
     private void addProjectActions() {
         commandsOverProject.put(Operation.ADD_PREDECESSOR_OF_STORY, new AddPredecessorOfStory());//------
-        commandsOverProject.put(Operation.ADD_STORY_TO_BACKLOG, new AddStoryToBacklog());
+        commandsOverProject.put(Operation.ADD_STORY_TO_BACKLOG, new AddStoryToBacklog());//------
         commandsOverProject.put(Operation.ADD_STORY_TO_SPRINT, new AddStoryToSprint());//------
         commandsOverProject.put(Operation.ADD_USER_TO_TEAM, new AddUserToTeam());//------
 
@@ -31,7 +31,7 @@ public class CommandSet implements ActionSet {
 
         commandsOverProject.put(Operation.MODIFY_PROJECT_DATA, new ModifyProjectData());
         commandsOverProject.put(Operation.MODIFY_RISK, new ModifyRisk());
-        commandsOverProject.put(Operation.MODIFY_STORY, new ModifyStory());
+        commandsOverProject.put(Operation.MODIFY_STORY, new ModifyStory());//------
 
         commandsOverProject.put(Operation.DELETE_RISK, new DeleteRisk());
         commandsOverProject.put(Operation.DELETE_SPRINT, new DeleteSprint());

@@ -8,6 +8,7 @@ import softpro.Model.Scrum.ScrumProject;
 import softpro.Persistence.Database.SqliteInterface;
 import softpro.View.Operation;
 import static softpro.Persistence.IdGenerator.generateNewIdForTable;
+import softpro.View.ActionSet;
 
 public class Application {
 
@@ -17,7 +18,7 @@ public class Application {
         //int project_id = IdGenerator("projects");
         //load_BD_Mock_Projects(project_id);
         //load_BD_Mock_UserStories(project_id);
-        CommandSet set = new CommandSet();
+        ActionSet set = new CommandSet();
         //new Application().start();
     }
 
