@@ -4,16 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Sprint implements Iterable<UserStory> {
 
     private final int id;
-    private LocalDate fecha_inicio;
+    private final LocalDate start_date;
     private final List<UserStory> userStoryList;
 
     public Sprint(int id, LocalDate fecha_inicio) {
         this.id = id;
-        this.fecha_inicio = fecha_inicio;
+        this.start_date = fecha_inicio;
         this.userStoryList = new ArrayList<>();
     }
 
@@ -22,15 +23,19 @@ public class Sprint implements Iterable<UserStory> {
     }
 
     public LocalDate getFecha_inicio() {
-        return fecha_inicio;
+        return start_date;
     }
 
-    public void setFecha_inicio(LocalDate fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
-    }
-
-    public LocalDate getFecha_fin() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    //--esto está mal, hay que buscar el camino critico porque hay historias que
+    //--se pueden hacer concurrentemente
+    public LocalDate getFecha_fin() throws Exception { 
+        LocalDate end_date = LocalDate.from(start_date);
+        for (UserStory story : userStoryList) {
+            end_date = end_date.plusDays(story.getPoints());
+            if (DAYS.between(start_date, end_date) > 27)
+                throw new Exception("El sprint dura más de 27 días");
+        }
+        return end_date;
     }
 
     public boolean addStory(UserStory story) {
