@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import softpro.Controller.CommandSet;
+import softpro.Controller.Operations.CreateProject;
+import softpro.Controller.Operations.ModifyProjectData;
 import softpro.Model.Project;
 import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.Scrum.Sprint;
-import softpro.Model.Scrum.UserStory;
 import softpro.Persistence.Database.SqliteInterface;
 import softpro.Model.Scrum.UserStory;
-import softpro.View.Operation;
+import softpro.Persistence.IdGenerator;
 import static softpro.Persistence.IdGenerator.generateNewIdForTable;
 import softpro.Persistence.ProjectLoader;
 import softpro.View.ActionSet;
@@ -21,7 +22,7 @@ public class Application {
 
     public static void main(String[] args) {
         ActionSet set = new CommandSet();
-        new Application().start();
+        //new Application().start();
     }
 
     private static void load_BD_Mock_Projects(int project_id) {
@@ -115,5 +116,38 @@ public class Application {
         }
 
     }
-
+    
+    private static void testingCreateProject(){
+        CreateProject createProject = new softpro.Controller.Operations.CreateProject();
+        HashMap<String, String> project = new HashMap<>();
+        int generateNewIdForTable = IdGenerator.generateNewIdForTable("projects");
+        project.put("id", Integer.toString(generateNewIdForTable));
+        project.put("name", "SameName2314¿?");
+        project.put("type", "Scrum");
+        createProject.execute(project);
+        String[] param = new String[]{"*"};
+        List<HashMap<String, String>> selectFrom = sqliteInterface.selectFrom("projects", param);
+        for (HashMap<String, String> hashMap : selectFrom) {
+            for (Object object : hashMap.entrySet()) {
+                System.out.println(object.toString());
+            }
+        }
+    }
+    
+    private static void testingModifyProject(){
+        ModifyProjectData createProject = new softpro.Controller.Operations.ModifyProjectData();
+        HashMap<String, String> project = new HashMap<>();
+        project.put("name", "TEST_UPDATE_PROJECT2 => ALL WORK");
+        project.put("type", "Incremental");
+        ScrumProject scrumProject = new ScrumProject(62, "SameName234¿?");
+        createProject.execute(scrumProject, project);
+        
+        String[] param = new String[]{"*"};
+        List<HashMap<String, String>> selectFrom = sqliteInterface.selectFrom("projects", param);
+        for (HashMap<String, String> hashMap : selectFrom) {
+            for (Object object : hashMap.entrySet()) {
+                System.out.println(object.toString());
+            }
+        }
+    }
 }
