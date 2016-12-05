@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Descargas/softpro/SoftPro/src/ScrumFrame.java</file>
+            <file>file:/C:/Users/User/Desktop/SoftPro/SoftPro/src/softpro/Controller/Operations/CreateProject.java</file>
+            <file>file:/C:/Users/User/Desktop/SoftPro/SoftPro/src/softpro/Application.java</file>
+            <file>file:/C:/Users/User/Desktop/SoftPro/SoftPro/src/softpro/Controller/Operations/ModifyProjectData.java</file>
+            <file>file:/C:/Users/User/Desktop/SoftPro/SoftPro/src/softpro/Persistence/Database/SqliteInterface.java</file>
+            <file>file:/C:/Users/User/Desktop/SoftPro/SoftPro/src/softpro/Persistence/Database/Softpro.db.sql</file>
         </group>
     </open-files>
 </project-private>
