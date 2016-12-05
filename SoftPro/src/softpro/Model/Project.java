@@ -44,4 +44,8 @@ public abstract class Project implements RiskFactory {
         this.team.removeUser(user);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

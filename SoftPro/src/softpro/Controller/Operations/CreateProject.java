@@ -1,22 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package softpro.Controller.Operations;
-
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import softpro.Persistence.Database.SqliteInterface;
 import softpro.View.AdministrativeAction;
 
-/**
- *
- * @author Mictlan
- */
 public class CreateProject implements AdministrativeAction {
 
+    private final SqliteInterface dbInterface = new SqliteInterface();
+    
     @Override
     public boolean execute(HashMap<String, String> arguments) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HashMap<String, Object> argumentsToObject = new HashMap<>();
+        for (Map.Entry<String, String> pair : arguments.entrySet()) {
+            argumentsToObject.put(pair.getKey(), pair.getValue());            
+            if (pair.getKey().equals("name") && !checkAvailability(pair.getValue()))
+                return false;
+        }
+        return dbInterface.insertInto("projects", argumentsToObject);
     }
-    
+
+    public boolean checkAvailability(String name) {
+        String[] param = new String[]{"name"};
+        List<HashMap<String, String>> selectFrom = dbInterface.selectFrom("projects", param);
+        for (HashMap<String, String> hashMap : selectFrom) {
+            for (Map.Entry<String,String> pair : hashMap.entrySet()) {
+                if (name.equals(pair.getValue()))
+                    return false;
+            }
+        }
+        return true;
+    }
 }
