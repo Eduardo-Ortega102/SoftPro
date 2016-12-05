@@ -16,7 +16,7 @@ public class DeleteUser implements AdministrativeAction {
         String[] select = {"*"};
         List<HashMap<String, String>> features = sqliteInterface.selectFrom("features", select);
         for (HashMap<String, String> hashMap : features) {
-            if(hashMap.get("responsible") == arguments.get("id")) databaseRemoveResponsibleFromFeatures(hashMap);
+            if(hashMap.get("responsible").equals(arguments.get("id"))) databaseRemoveResponsibleFromFeatures(hashMap);
         }
         if(databaseRemoveStaffFromTeam(Integer.valueOf(arguments.get("id")))==false) return false;
         return databaseRemoveStaff(Integer.valueOf(arguments.get("id")));
