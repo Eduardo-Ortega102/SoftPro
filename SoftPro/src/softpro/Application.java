@@ -1,16 +1,12 @@
 package softpro;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import softpro.Controller.CommandSet;
-import softpro.Model.Project;
 import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.Scrum.Sprint;
-import softpro.Model.Scrum.UserStory;
 import softpro.Persistence.Database.SqliteInterface;
 import softpro.Model.Scrum.UserStory;
-import softpro.View.Operation;
 import static softpro.Persistence.IdGenerator.generateNewIdForTable;
 import softpro.Persistence.ProjectLoader;
 import softpro.View.ActionSet;
