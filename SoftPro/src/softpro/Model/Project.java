@@ -36,14 +36,10 @@ public abstract class Project implements RiskFactory {
         return this.riskList;
     }
 
-    public void addUser(User user) {
-        this.team.addUser(user);
-    }
+    public abstract void addUser(User user);
 
-    public void removeUser(User user) {
-        this.team.removeUser(user);
-    }
-
+    public abstract void removeUser(User user);
+    
     public void setName(String name) {
         this.name = name;
     }

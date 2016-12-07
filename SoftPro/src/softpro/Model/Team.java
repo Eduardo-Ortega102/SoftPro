@@ -25,6 +25,10 @@ public class Team implements Iterable<User> {
     public Iterator<User> iterator() {
         return this.staff.iterator();
     }
+    
+    public int getamountOfMembers(){
+        return this.staff.size();
+    }
 
     public User findUser(int id) {
         for (User user : staff)

@@ -11,14 +11,16 @@ public class Sprint implements Iterable<UserStory> {
     private static final double HOURS_OF_WORK_PER_WEEK = 40;
     private final int id;
     private final int weeks;
+    private int sizeOfTeam;
     private final LocalDate start_date;
-    private final List<UserStory> userStoryList;
+    private final List<UserStory> stories;
 
-    public Sprint(int id, LocalDate fecha_inicio, int weeks) {
+    public Sprint(int id, LocalDate fecha_inicio, int weeks, int sizeOfTeam) {
         this.id = id;
         this.weeks = weeks;
+        this.sizeOfTeam = sizeOfTeam;
         this.start_date = fecha_inicio;
-        this.userStoryList = new ArrayList<>();
+        this.stories = new ArrayList<>();
     }
 
     public int getId() {
@@ -34,34 +36,33 @@ public class Sprint implements Iterable<UserStory> {
     }
 
     public boolean addStory(UserStory story) {
-        if (hoursOfStories() + story.getPoints() > hoursOfWorkInSprint()) return false;
-        return userStoryList.add(story);
+        if (storiesDuration() + story.getPoints() > hoursOfWork()) return false;
+        return stories.add(story);
     }
 
-    private int hoursOfStories() {
+    public int storiesDuration() {
         int amountOfHours = 0;
-        for (UserStory story : userStoryList)
-            amountOfHours += story.getPoints();
+        for (UserStory story : stories) amountOfHours += story.getPoints();
         return amountOfHours;
     }
 
-    private double hoursOfWorkInSprint() {
-        return weeks * HOURS_OF_WORK_PER_WEEK * FOCUS_FACTOR;
+    public double hoursOfWork() {
+        return HOURS_OF_WORK_PER_WEEK * weeks * sizeOfTeam * FOCUS_FACTOR;
     }
     
     public boolean removeUserStory(UserStory story) {
-        return this.userStoryList.remove(story);
+        return this.stories.remove(story);
     }
     
     public UserStory findStory(int id){
-        for (UserStory story : userStoryList)
+        for (UserStory story : stories)
             if (story.getId() == id) return story;
         return null;
     }
 
     @Override
     public Iterator<UserStory> iterator() {
-        return this.userStoryList.iterator();
+        return this.stories.iterator();
     }
     
     @Override
@@ -74,6 +75,14 @@ public class Sprint implements Iterable<UserStory> {
         if (this == obj) return true;
         if (obj == null || this.getClass() != obj.getClass()) return false;
         return this.id == ((Sprint) obj).id;
+    }
+
+    public void incrementTeamSize() {
+        this.sizeOfTeam++;
+    }
+
+    public void decrementTeamSize() {
+        this.sizeOfTeam--;
     }
 
 }

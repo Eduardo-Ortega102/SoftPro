@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import softpro.Model.Factories.SprintFactory;
 import softpro.Model.Project;
+import softpro.Model.User;
 
 public class ScrumProject extends Project implements Iterable<Sprint>, SprintFactory {
 
@@ -38,8 +39,20 @@ public class ScrumProject extends Project implements Iterable<Sprint>, SprintFac
     }
 
     @Override
+    public void addUser(User user) {
+        team.addUser(user);
+        for (Sprint sprint : this) sprint.incrementTeamSize();
+    }
+
+    @Override
+    public void removeUser(User user) {
+        team.removeUser(user);
+        for (Sprint sprint : this) sprint.decrementTeamSize();
+    }
+
+    @Override
     public Sprint create(int id, LocalDate fecha_inicio, int weeks) {
-        Sprint sprint = new Sprint(id, fecha_inicio, weeks);
+        Sprint sprint = new Sprint(id, fecha_inicio, weeks, team.getamountOfMembers());
         this.sprintList.add(sprint);
         return sprint;
     }
@@ -54,5 +67,6 @@ public class ScrumProject extends Project implements Iterable<Sprint>, SprintFac
             if (sprint.getId() == id) return sprint;
         return null;
     }
+
 
 }
