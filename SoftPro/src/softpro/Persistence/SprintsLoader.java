@@ -25,7 +25,8 @@ public class SprintsLoader {
 
     private static void loadSprints(ScrumProject project, List<HashMap<String, String>> list) {
         for (HashMap<String, String> map : list)
-            project.create(valueOf(map.get("id")), LocalDate.parse(map.get("start_date")));
+            project.create(valueOf(map.get("id")), LocalDate.parse(map.get("start_date")), 
+                           Integer.parseInt(map.get("weeks")));
     }
 
     private static void loadUserStories(ScrumProject project) {

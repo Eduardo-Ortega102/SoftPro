@@ -4,16 +4,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Sprint implements Iterable<UserStory> {
 
+    private static final double FOCUS_FACTOR = 0.75;
+    private static final double HOURS_OF_WORK_PER_WEEK = 40;
     private final int id;
+    private final int weeks;
     private final LocalDate start_date;
     private final List<UserStory> userStoryList;
 
-    public Sprint(int id, LocalDate fecha_inicio) {
+    public Sprint(int id, LocalDate fecha_inicio, int weeks) {
         this.id = id;
+        this.weeks = weeks;
         this.start_date = fecha_inicio;
         this.userStoryList = new ArrayList<>();
     }
@@ -26,22 +29,26 @@ public class Sprint implements Iterable<UserStory> {
         return start_date;
     }
 
-    //--esto está mal, hay que buscar el camino critico porque hay historias que
-    //--se pueden hacer concurrentemente
     public LocalDate getFecha_fin() throws Exception { 
-        LocalDate end_date = LocalDate.from(start_date);
-        for (UserStory story : userStoryList) {
-            end_date = end_date.plusDays(story.getPoints());
-            if (DAYS.between(start_date, end_date) > 27)
-                throw new Exception("El sprint dura más de 27 días");
-        }
-        return end_date;
+        return LocalDate.from(start_date).plusWeeks(weeks);
     }
 
     public boolean addStory(UserStory story) {
-        return this.userStoryList.add(story);
+        if (hoursOfStories() + story.getPoints() > hoursOfWorkInSprint()) return false;
+        return userStoryList.add(story);
     }
 
+    private int hoursOfStories() {
+        int amountOfHours = 0;
+        for (UserStory story : userStoryList)
+            amountOfHours += story.getPoints();
+        return amountOfHours;
+    }
+
+    private double hoursOfWorkInSprint() {
+        return weeks * HOURS_OF_WORK_PER_WEEK * FOCUS_FACTOR;
+    }
+    
     public boolean removeUserStory(UserStory story) {
         return this.userStoryList.remove(story);
     }
@@ -68,4 +75,5 @@ public class Sprint implements Iterable<UserStory> {
         if (obj == null || this.getClass() != obj.getClass()) return false;
         return this.id == ((Sprint) obj).id;
     }
+
 }
