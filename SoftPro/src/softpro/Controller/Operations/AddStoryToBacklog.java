@@ -14,7 +14,12 @@ public class AddStoryToBacklog implements ActionOverProject<ScrumProject> {
     public boolean execute(ScrumProject project, HashMap<String, String> arguments) {
         for (UserStory userStory : project.getBacklog())
             if (userStory.getDescription().equalsIgnoreCase(arguments.get("description"))) return false;
-        UserStory story = project.getBacklog().create(generateNewIdForTable("features"), arguments.get("description"));
+        int id = generateNewIdForTable("features");
+        String description = arguments.get("description");
+        String details = "";
+        int priority = Integer.valueOf(arguments.get("priority"));
+        int points = Integer.valueOf(arguments.get("points"));
+        UserStory story = project.getBacklog().create(id, description, details, points, priority);
         return storeInDatabase(story, project);
     }
 

@@ -21,13 +21,15 @@ public class AddStoryToBacklog_ {
         actionSet = new CommandSet();
     }
 
-//    @Test
-//    public void add_story_to_backlog() {
-//        HashMap<String, String> arguments = new HashMap<>();
-//        arguments.put("description", "Historia 5");
-//        boolean result = actionSet.getProjectAction(Operation.ADD_STORY_TO_BACKLOG).execute(project, arguments);
-//        assertTrue(result);
-//    }
+    @Test
+    public void add_story_to_backlog() {
+        HashMap<String, String> arguments = new HashMap<>();
+        arguments.put("description", "Historia prueba");
+        arguments.put("priority", "2");
+        arguments.put("points", "13");
+        boolean result = actionSet.getProjectAction(Operation.ADD_STORY_TO_BACKLOG).execute(project, arguments);
+        assertTrue(result);
+    }
     
     @Test
     public void story_5_exists(){
