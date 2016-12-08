@@ -10,9 +10,9 @@ public class Sprint implements Iterable<UserStory> {
     private static final double FOCUS_FACTOR = 0.75;
     private static final double HOURS_OF_WORK_PER_WEEK = 40;
     private final int id;
-    private final int weeks;
+    private int weeks;
     private int sizeOfTeam;
-    private final LocalDate start_date;
+    private LocalDate start_date;
     private final List<UserStory> stories;
 
     public Sprint(int id, LocalDate fecha_inicio, int weeks, int sizeOfTeam) {
@@ -25,6 +25,18 @@ public class Sprint implements Iterable<UserStory> {
 
     public int getId() {
         return id;
+    }
+
+    public int getWeeks() {
+        return weeks;
+    }
+
+    public void setWeeks(int weeks) {
+        this.weeks = weeks;
+    }
+
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
     }
 
     public LocalDate getFecha_inicio() {

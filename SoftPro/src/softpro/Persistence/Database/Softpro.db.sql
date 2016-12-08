@@ -21,11 +21,11 @@ CREATE TABLE "staff" (
 	`email`	TEXT NOT NULL UNIQUE,
 	PRIMARY KEY(`id`)
 );
-
 CREATE TABLE "sprints" (
 	`id`	INTEGER NOT NULL,
 	`start_date`	TEXT NOT NULL,
 	`project`	INTEGER NOT NULL,
+	`weeks`	INTEGER NOT NULL,
 	PRIMARY KEY(`id`),
 	FOREIGN KEY(`project`) REFERENCES `project`(`id`)
 );
