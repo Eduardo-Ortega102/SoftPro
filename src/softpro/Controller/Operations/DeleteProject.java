@@ -21,18 +21,8 @@ public class DeleteProject implements AdministrativeAction {
     
     @Override
     public boolean execute(HashMap<String, String> arguments) {
-        if(arguments.get("projectID") == null) return false;
-        String[] select = {"*"};
-        String where = arguments.get("projectID");
-        List<HashMap<String, String>> project = sqliteInterface.selectFrom("projects", select, where);
-        List<String> iDs = new ArrayList<>();
-        for (HashMap<String, String> hashMap : project) {
-            if(hashMap.get("type").equals("Scrum")) iDs.add(""+hashMap.get("id"));
-        }
-        for (String id : iDs) {
-            DeleteScrumProject(id);
-        }
-        return false;
+        String projectID = arguments.get("projectID");
+        return DeleteScrumProject(projectID);
     }
     
     private boolean DeleteScrumProject(String projectID){
@@ -47,7 +37,6 @@ public class DeleteProject implements AdministrativeAction {
             arguments.put("sprintID", iD);
             actionSet.getProjectAction(Operation.DELETE_SPRINT).execute(scrumProject, arguments);
         }
-        
         iDs = new ArrayList<>();
         for (UserStory story : scrumProject.getBacklog()) {
             iDs.add(""+story.getId());

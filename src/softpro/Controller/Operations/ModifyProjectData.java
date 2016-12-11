@@ -29,5 +29,4 @@ public class ModifyProjectData implements ActionOverProject<Project> {
         }
         return argumentsToObject;
     }
-    
 }

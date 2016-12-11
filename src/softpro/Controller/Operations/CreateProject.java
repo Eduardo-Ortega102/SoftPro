@@ -13,12 +13,10 @@ public class CreateProject implements AdministrativeAction {
     @Override
     public boolean execute(HashMap<String, String> arguments) {
         HashMap<String, Object> argumentsToObject = new HashMap<>();
-        for (Map.Entry<String, String> pair : arguments.entrySet()) {
-            argumentsToObject.put(pair.getKey(), pair.getValue());            
-            if (pair.getKey().equals("name") && !checkAvailability(pair.getValue()))
-                return false;
-        }
+        if(!checkAvailability(arguments.get("name"))) return false;
+        argumentsToObject.put("name", arguments.get("name"));
         argumentsToObject.put("id", IdGenerator.generateNewIdForTable("projects"));
+        argumentsToObject.put("type", "Scrum");
         return dbInterface.insertInto("projects", argumentsToObject);
     }
 

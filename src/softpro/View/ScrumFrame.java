@@ -1,25 +1,38 @@
 package softpro.View;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
+import softpro.Controller.CommandSet;
+import softpro.Model.Project;
+import softpro.Model.Scrum.ScrumProject;
+import softpro.Persistence.Database.SqliteInterface;
+import softpro.Persistence.ProjectLoader;
 
 public class ScrumFrame extends javax.swing.JFrame {
-
+    private ScrumProject project;
+    private final CommandSet actionSet;
     addSprint newSprint = new addSprint(this, true);
+    ArrayList<Project> projectsList = new ArrayList<>();
 
     /**
      * Creates new form Try
      */
     public ScrumFrame() {
-
         initComponents();
+        this.actionSet = new CommandSet();
         dialogoProyectos.pack();
         RefineryUtilities.centerFrameOnScreen(dialogoProyectos);
         dialogoCrearProyecto.pack();
         RefineryUtilities.centerFrameOnScreen(dialogoCrearProyecto);
+        project = ProjectLoader.loadScrumProject(2);
+        estimacion = new Estimacion(project);
+        planificacion = new Planificacion(project);
     }
 
     /**
@@ -36,6 +49,7 @@ public class ScrumFrame extends javax.swing.JFrame {
         listaProyectos = new javax.swing.JTable();
         abrirProyecto = new javax.swing.JButton();
         añadirProyecto = new javax.swing.JButton();
+        eliminarProyecto = new javax.swing.JButton();
         dialogoCrearProyecto = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -71,25 +85,7 @@ public class ScrumFrame extends javax.swing.JFrame {
 
         dialogoProyectos.setTitle("Proyectos");
 
-        listaProyectos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id", "Nombre proyecto"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        listaProyectos.setModel(this.createTableDataModel());
         listaProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaProyectosMouseClicked(evt);
@@ -112,6 +108,13 @@ public class ScrumFrame extends javax.swing.JFrame {
             }
         });
 
+        eliminarProyecto.setText("Eliminar proyecto");
+        eliminarProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarProyectoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dialogoProyectosLayout = new javax.swing.GroupLayout(dialogoProyectos.getContentPane());
         dialogoProyectos.getContentPane().setLayout(dialogoProyectosLayout);
         dialogoProyectosLayout.setHorizontalGroup(
@@ -121,9 +124,10 @@ public class ScrumFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dialogoProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(abrirProyecto)
-                    .addComponent(añadirProyecto))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(eliminarProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(añadirProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(abrirProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         dialogoProyectosLayout.setVerticalGroup(
             dialogoProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +137,9 @@ public class ScrumFrame extends javax.swing.JFrame {
                     .addGroup(dialogoProyectosLayout.createSequentialGroup()
                         .addComponent(abrirProyecto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(añadirProyecto))
+                        .addComponent(añadirProyecto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eliminarProyecto))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -141,6 +147,12 @@ public class ScrumFrame extends javax.swing.JFrame {
         dialogoCrearProyecto.setTitle("Crear proyecto");
 
         jLabel1.setText("Nombre proyecto:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         crearProyectoButton.setText("Crear");
         crearProyectoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -427,7 +439,20 @@ public class ScrumFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    @SuppressWarnings("empty-statement")
+    private DefaultTableModel createTableDataModel() {
+        String[][] data = new String[100][10];
+        int filas = 0;
+        for (HashMap<String, String> project : selectProjects()){
+            data[filas][0] = project.get("id");
+            data[filas][1] = project.get("name");
+            filas++;
+        }
+        String[] header = {"Id", "Nombre de Proyecto"};
+        return new DefaultTableModel(data, header);
+    }
+    
     private void calendarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarButtonMouseClicked
 
         setCurrentPanelPlanificacion();
@@ -478,7 +503,11 @@ public class ScrumFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addProjectIconMouseClicked
 
     private void abrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoActionPerformed
-        // TODO add your handling code here:
+        int projectID = Integer.parseInt(listaProyectos.getValueAt(listaProyectos.getSelectedRow(), 0).toString());
+        project = ProjectLoader.loadScrumProject(projectID);
+        estimacion = new Estimacion(project);
+        ScrumFrame.this.setTitle("SoftPro - " + listaProyectos.getValueAt(listaProyectos.getSelectedRow(), 1).toString());
+        dialogoProyectos.setVisible(false);
     }//GEN-LAST:event_abrirProyectoActionPerformed
 
     private void añadirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirProyectoActionPerformed
@@ -492,7 +521,13 @@ public class ScrumFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_listaProyectosMouseClicked
 
     private void crearProyectoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProyectoButtonActionPerformed
-        // TODO add your handling code here:
+        HashMap<String, String> arguments = new HashMap<>();
+        arguments.put("name",jTextField1.getText().trim());
+        boolean r = actionSet.getAdministrativeAction(Operation.CREATE_PROJECT).execute(arguments);
+        System.out.println(r);
+        listaProyectos.setModel(createTableDataModel());
+        jTextField1.setText("");
+        dialogoCrearProyecto.setVisible(false);
     }//GEN-LAST:event_crearProyectoButtonActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -503,6 +538,21 @@ public class ScrumFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         dialogoProyectos.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void eliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProyectoActionPerformed
+        String index = (String) listaProyectos.getValueAt(listaProyectos.getSelectedRow(), 0);
+        HashMap<String, String> arguments = new HashMap<>();
+        arguments.put("projectID",index);
+        boolean r = actionSet.getAdministrativeAction(Operation.DELETE_PROJECT).execute(arguments);
+        System.out.println(r);
+        listaProyectos.setModel(createTableDataModel());
+        int firstProjectInList = Integer.parseInt(listaProyectos.getValueAt(0, 0).toString());
+        project = ProjectLoader.loadScrumProject(firstProjectInList);
+    }//GEN-LAST:event_eliminarProyectoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -524,7 +574,6 @@ public class ScrumFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ScrumFrame().setVisible(true);
-
             }
         });
     }
@@ -585,6 +634,7 @@ public class ScrumFrame extends javax.swing.JFrame {
     private javax.swing.JButton crearProyectoButton;
     private javax.swing.JDialog dialogoCrearProyecto;
     private javax.swing.JDialog dialogoProyectos;
+    private javax.swing.JButton eliminarProyecto;
     private javax.swing.JLabel estimacionLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -614,8 +664,8 @@ public class ScrumFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /* JPanels para planificación, estimación, riesgos y resumen general */
-    private Planificacion planificacion = new Planificacion();
-    private Estimacion estimacion = new Estimacion();
+    private Planificacion planificacion;
+    private Estimacion estimacion;
     private Riesgos riesgos = new Riesgos();
     private GeneralResumen general = new GeneralResumen();
 
@@ -636,5 +686,9 @@ public class ScrumFrame extends javax.swing.JFrame {
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addComponent(contenido, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+    }
+
+    private Iterable<HashMap<String, String>> selectProjects() {
+        return new SqliteInterface().selectFrom("projects", new String[]{"*"});
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
+import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.State;
 import softpro.Persistence.Database.SqliteInterface;
 import static softpro.Persistence.IdGenerator.generateNewIdForTable;
@@ -15,8 +16,10 @@ public class Planificacion extends javax.swing.JPanel {
      * Creates new form pruebaGeneral
      */
     int index = 0;
+    private final ScrumProject project;
 
-    public Planificacion() {
+    public Planificacion(ScrumProject project) {
+        this.project = project;
         initComponents();
     }
 

@@ -15,10 +15,11 @@
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="abrirProyecto" min="-2" max="-2" attributes="0"/>
-                      <Component id="añadirProyecto" min="-2" max="-2" attributes="0"/>
+                      <Component id="eliminarProyecto" max="32767" attributes="0"/>
+                      <Component id="añadirProyecto" max="32767" attributes="0"/>
+                      <Component id="abrirProyecto" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -31,6 +32,8 @@
                           <Component id="abrirProyecto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="añadirProyecto" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="eliminarProyecto" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="330" max="-2" attributes="0"/>
                   </Group>
@@ -49,11 +52,8 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="listaProyectos">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="4">
-                    <Column editable="true" title="Id" type="java.lang.Integer"/>
-                    <Column editable="true" title="Nombre proyecto" type="java.lang.Object"/>
-                  </Table>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="this.createTableDataModel()" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
@@ -94,6 +94,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="a&#xf1;adirProyectoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="eliminarProyecto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar proyecto"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarProyectoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -139,6 +147,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="crearProyectoButton">
           <Properties>

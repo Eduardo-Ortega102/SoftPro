@@ -8,7 +8,6 @@ import org.jfree.ui.RefineryUtilities;
 import softpro.Controller.CommandSet;
 import softpro.Model.Scrum.ScrumProject;
 import softpro.Model.Scrum.UserStory;
-import softpro.Persistence.ProjectLoader;
 
 public class Estimacion extends javax.swing.JPanel {
 
@@ -16,9 +15,10 @@ public class Estimacion extends javax.swing.JPanel {
     private final addUserStory addDialog = new addUserStory();
     private final deleteUserStory deleteDialog = new deleteUserStory();
     private final modifyUserStory modifyDialog = new modifyUserStory();
-    private final ScrumProject project = ProjectLoader.loadScrumProject(2);
+    private final ScrumProject project;
     private final CommandSet actionSet;
-    public Estimacion() {
+    public Estimacion(ScrumProject project) {
+        this.project = project;
         initComponents();
         this.actionSet = new CommandSet();
         addDialog.pack();
@@ -39,6 +39,7 @@ public class Estimacion extends javax.swing.JPanel {
     @SuppressWarnings("empty-statement")
     private DefaultTableModel createTableDataModel() {
         ArrayList<UserStory> userStoryList = new ArrayList<>();
+        System.out.println(project);
         Iterator<UserStory> iterator = project.getBacklog().iterator();
         while (iterator.hasNext()) {
             userStoryList.add(iterator.next());
